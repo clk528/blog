@@ -12,3 +12,4 @@ yarn-error.log
 .env
 composer.lock
 /*.log
+_ide_helper.php

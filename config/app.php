@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => env('TIME_ZONE','Asia/Shanghai'),
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -176,6 +176,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+
+        EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider::class,
 
     ],
 
