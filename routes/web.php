@@ -16,6 +16,23 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=>'article','namespace' => 'Article'],function(){
+    /**
+     * 获取文章列表
+     */
     Route::get('/getArticleList','ArticleController@getArticleList');
+    /**
+     * 获取单篇文章
+     */
     Route::get('/getArticle','ArticleController@getArticle');
+    /**
+     * 添加文章
+     */
+    Route::get('/addArticle','ArticleController@addArticle');
+    /*
+     * 修改文章
+     */
+    Route::get('/modifyArticle','ArticleController@modifyArticle');
 });
+\Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

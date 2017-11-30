@@ -33,11 +33,30 @@ class ArticleService
     }
 
     /**
+     * 获取单篇文章
      * @param int $id
      * @return mixed
      */
     public function getArticle($id)
     {
         return $this->articleRepository->getArticle($id);
+    }
+
+    /**
+     * 添加一篇文章
+     * @return mixed
+     */
+    public function addArticle()
+    {
+        return $this->articleRepository->addArticle();
+    }
+
+    /**
+     * 修改文章
+     * @return bool
+     */
+    public function modifyArticle()
+    {
+        return $this->articleRepository->modifyArticle();
     }
 }

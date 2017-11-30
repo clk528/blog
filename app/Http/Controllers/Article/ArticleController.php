@@ -14,6 +14,10 @@ use App\Transforms\ArticleTransform;
 use Illuminate\Http\Request;
 use EllipseSynergie\ApiResponse\Contracts\Response as ApiResponse;
 
+/**
+ * Class ArticleController
+ * @package App\Http\Controllers\Article
+ */
 class ArticleController extends Controller
 {
     /**
@@ -37,6 +41,7 @@ class ArticleController extends Controller
     }
 
     /**
+     * 获取文章列表
      * @return mixed
      */
     public function getArticleList()
@@ -45,6 +50,7 @@ class ArticleController extends Controller
     }
 
     /**
+     * 获取单篇文章
      * @param Request $request
      * @return mixed
      */
@@ -55,5 +61,26 @@ class ArticleController extends Controller
             return $this->apiResponse->withArray(['code'=>0,'message'=>'去你大爷的']);
         }
         return $this->apiResponse->withItem($this->articleService->getArticle($id),new ArticleTransform);
+    }
+
+    /**
+     * 添加一篇文章
+     * @return mixed
+     */
+    public function addArticle()
+    {
+        return $this->apiResponse->withItem($this->articleService->addArticle(),new ArticleTransform);
+    }
+
+    /**
+     * 修改文章
+     * @return mixed
+     */
+    public function modifyArticle()
+    {
+        \DB::enableQueryLog();
+        $this->apiResponse->withItem([$this->articleService->modifyArticle()],new ArticleTransform);
+        $log = \DB::getQueryLog();
+        dd($log);
     }
 }

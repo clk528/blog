@@ -51,11 +51,60 @@ class ArticleRepository
     }
 
     /**
+     * 单独获取一片文章
      * @param int $id
      * @return mixed
      */
     public function getArticle($id)
     {
         return $this->article->whereId($id)->get(['id','title','content','tag','create_user as createUser','modifiy_user as modifiyUser','created','modified']);
+    }
+
+    /**
+     * 添加一篇文章
+     * @return mixed
+     */
+    public function addArticle()
+    {
+        $article = [
+            'title' => '我是标题',
+            'content' => '我是文章',
+            'tag' => 'zihuan',
+            'create_user' => 'admin',
+            'modifiy_user' => 'admin'
+        ];
+
+        return $this->article->create($article);
+    }
+
+    /**
+     * 修改文章
+     * @return bool
+     */
+    public function modifyArticle()
+    {
+
+
+
+
+        $article = $this->article->whereId(1)->first(['*']);
+
+
+        dd($article);
+
+        if(!is_null($article)){
+            return $article->update([
+                'title' => '我是标题',
+                'content' => '我是文章-----'.date('Y-m-d H:i:s'),
+                'tag' => 'zihuan',
+                'create_user' => 'admin',
+                'modifiy_user' => 'admin'
+            ]);
+        }
+
+
+
+
+        return false;
     }
 }
