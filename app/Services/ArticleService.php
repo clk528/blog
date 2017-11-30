@@ -23,8 +23,21 @@ class ArticleService
         $this->articleRepository = $articleRepository;
     }
 
-    public function getArticle()
+    /**
+     * 获取文章列表
+     * @return mixed
+     */
+    public function getArticleList()
     {
-        return $this->articleRepository->getArticle();
+        return $this->articleRepository->getArticleList();
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getArticle($id)
+    {
+        return $this->articleRepository->getArticle($id);
     }
 }

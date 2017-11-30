@@ -15,5 +15,25 @@ class ArticleTransform extends TransformerAbstract
     public function transform($data)
     {
         return is_object($data) ? $data->toArray() : $data;
+//        $data =  is_object($data) ? $data->toArray() : $data;
+//
+//        if(empty($data))
+//        {
+//            return [];
+//        }
+//
+//        if(isset($data['data'])){
+//            $data['data'] = collect($data['data'])->each(function($v,$k){
+//                return [
+//                    $k => stringToCamel($v)
+//                ];
+//            })->toArray();
+//        } else {
+//            foreach ($data as $k=>$v){
+//                $data[$k] = stringToCamel($v);
+//            }
+//        }
+//
+//        return $data;
     }
 }

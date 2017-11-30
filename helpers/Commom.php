@@ -48,3 +48,13 @@ if(!function_exists('password_encode'))
         return $decrypted;
     }
 }
+
+if(!function_exists('stringToCamel'))
+{
+    function stringToCamel($string)
+    {
+        return preg_replace_callback('/([-_]+([a-z]{1}))/i',function($matches){
+            return strtoupper($matches[2]);
+        },$string);
+    }
+}

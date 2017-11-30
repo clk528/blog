@@ -30,7 +30,7 @@ class ArticleRepository
      * 获取文章翻页
      * @return mixed
      */
-    public function getArticle()
+    public function getArticleList()
     {
         $search = request('search',[]);
 
@@ -47,6 +47,15 @@ class ArticleRepository
             $model = $model->Where($k,'like',"%{$v}%");
         });
 
-        return $model->paginate($perPage);
+        return $model->paginate($perPage,['id','title','tag','create_user as createUser','modifiy_user as modifiyUser','created','modified']);
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getArticle($id)
+    {
+        return $this->article->whereId($id)->get(['id','title','content','tag','create_user as createUser','modifiy_user as modifiyUser','created','modified']);
     }
 }

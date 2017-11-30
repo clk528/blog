@@ -35,12 +35,25 @@ class ArticleController extends Controller
         $this->articleService = $articleService;
         $this->apiResponse = $apiResponse;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getArticleList()
+    {
+        return $this->apiResponse->withItem($this->articleService->getArticleList(),new ArticleTransform);
+    }
+
     /**
      * @param Request $request
      * @return mixed
      */
     public function getArticle(Request $request)
     {
-        return $this->apiResponse->withItem($this->articleService->getArticle(),new ArticleTransform);
+        $id = $request->input('id','');
+        if (empty($id)){
+            return $this->apiResponse->withArray(['code'=>0,'message'=>'去你大爷的']);
+        }
+        return $this->apiResponse->withItem($this->articleService->getArticle($id),new ArticleTransform);
     }
 }

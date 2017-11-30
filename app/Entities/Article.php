@@ -16,7 +16,7 @@ class Article extends Model
 
     const UPDATED_AT = "modified";
 
-    protected $dateFormat = "U";
+    protected $dateFormat = "Y-m-d H:i:s";
 
     protected $fillable = [
         'title',
