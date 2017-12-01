@@ -34,7 +34,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{route('home')}}">管理面板</a>
+            <a class="navbar-brand" style="color: white" href="{{route('home')}}">管理面板</a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
 
@@ -50,8 +50,8 @@
 
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown messages-dropdown">
-                    <a href="index.html#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i>
-                        消息 <span class="badge">2</span> <b class="caret"></b></a>
+                    <a href="index.html#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;"><i class="fa fa-envelope"></i>
+                        消息 <span class="badge" style="background:white;color: #57B779;">2</span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">2 条消息</li>
                         <li class="message-preview">
@@ -72,7 +72,7 @@
                     </ul>
                 </li>
                 <li class="dropdown user-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->user }}<b
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;"><i class="fa fa-user"></i> {{ Auth::user()->user }}<b
                                 class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="fa fa-user"></i> 个人信息</a></li>
