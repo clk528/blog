@@ -59,6 +59,12 @@ Route::group(['prefix' => 'auth','namespace' => 'Auth'],function(){
 Route::group(['prefix' => 'admin','namespace'=>'Admin'],function(){
     //Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', 'AdminController@index')->name('home');
+    Route::get('/blog', 'AdminController@blog')->name('blog');
+    Route::get('/portfolio', 'AdminController@portfolio')->name('portfolio');
+    Route::get('/forms', 'AdminController@forms')->name('forms');
+    Route::get('/typography', 'AdminController@typography')->name('typography');
+    Route::get('/bootstrapElements', 'AdminController@bootstrapElements')->name('bootstrapElements');
+    Route::get('/bootstrapGrid', 'AdminController@bootstrapGrid')->name('bootstrapGrid');
 });
 
 
