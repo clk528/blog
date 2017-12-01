@@ -30,9 +30,7 @@ class RegisterController extends Controller
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * RegisterController constructor.
      */
     public function __construct()
     {
@@ -58,14 +56,27 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Entities\User
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        return \App\Entities\User::create([
+            'user' => $data['name'],
+            'alias' => random_int(1,10000).time(),
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'create_user' => 'system',
+            'modify_user' => 'system',
         ]);
+    }
+
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    function redirectPath()
+    {
+        return route('home');
     }
 }

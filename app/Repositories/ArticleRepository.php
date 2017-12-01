@@ -47,7 +47,7 @@ class ArticleRepository
             $model = $model->Where($k,'like',"%{$v}%");
         });
 
-        return $model->paginate($perPage,['id','title','tag','create_user as createUser','modifiy_user as modifiyUser','created','modified']);
+        return $model->paginate($perPage,['id','title','tag','create_user as createUser','modify_user as modifyUser','created','modified']);
     }
 
     /**
@@ -57,7 +57,7 @@ class ArticleRepository
      */
     public function getArticle($id)
     {
-        return $this->article->whereId($id)->get(['id','title','content','tag','create_user as createUser','modifiy_user as modifiyUser','created','modified']);
+        return $this->article->whereId($id)->get(['id','title','content','tag','create_user as createUser','modify_user as modifyUser','created','modified']);
     }
 
     /**
@@ -71,7 +71,7 @@ class ArticleRepository
             'content' => '我是文章',
             'tag' => 'zihuan',
             'create_user' => 'admin',
-            'modifiy_user' => 'admin'
+            'modify_user' => 'admin'
         ];
 
         return $this->article->create($article);
@@ -98,7 +98,7 @@ class ArticleRepository
                 'content' => '我是文章-----'.date('Y-m-d H:i:s'),
                 'tag' => 'zihuan',
                 'create_user' => 'admin',
-                'modifiy_user' => 'admin'
+                'modify_user' => 'admin'
             ]);
         }
 

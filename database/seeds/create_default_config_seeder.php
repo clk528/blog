@@ -16,7 +16,7 @@ class create_default_config_seeder extends Seeder
             'content' => '今天是:' . date('Y-m-d H:i:s') ,
             'tag' => 'test',
             'create_user' =>'admin',
-            'modifiy_user' =>'admin',
+            'modify_user' =>'admin',
         ]);
 
         \App\Entities\Comment::create([
@@ -25,7 +25,7 @@ class create_default_config_seeder extends Seeder
             'content' => '写的非常好',
             'type' => 1,
             'create_user' =>'admin',
-            'modifiy_user' =>'admin'
+            'modify_user' =>'admin'
         ]);
 
         $role = \App\Entities\Role::create([
@@ -44,7 +44,7 @@ class create_default_config_seeder extends Seeder
             'facebook' => '陈龙科',
             'status' => 1,
             'create_user' => 'system',
-            'modifiy_user' => 'system',
+            'modify_user' => 'system',
             'login_time' => time()
         ]);
     }

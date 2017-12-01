@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -25,12 +26,10 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/admin/home';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * LoginController constructor.
      */
     public function __construct()
     {
@@ -43,5 +42,28 @@ class LoginController extends Controller
     function username()
     {
         return 'user';
+    }
+
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    function redirectPath()
+    {
+        return route('home');
+    }
+    /**
+     * 用户登录成功
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        $user->update([
+            'login_time' => time()
+        ]);
     }
 }

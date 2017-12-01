@@ -2,10 +2,12 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
+    use Notifiable;
 
     const CREATED_AT = "created";
 
@@ -29,7 +31,7 @@ class User extends Model
         'facebook',
         'status',
         'create_user',
-        'modifiy_user',
+        'modify_user',
         'login_time'
     ];
 }

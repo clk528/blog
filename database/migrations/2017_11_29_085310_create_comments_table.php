@@ -20,7 +20,7 @@ class CreateCommentsTable extends Migration
             $table->text('content')->comment('内容');
             $table->integer('type',false,false)->comment('评论类型:1、新增，2、回复');
             $table->string('create_user',50)->comment('修改者');;
-            $table->string('modifiy_user',50)->comment('修改人');
+            $table->string('modify_user',50)->comment('修改人');
             $table->integer('created',false,false)->comment('创建时间');
             $table->integer('modified',false,false)->comment('修改日期');
         });

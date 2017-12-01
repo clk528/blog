@@ -24,6 +24,6 @@ class Comment extends Model
         'content',
         'type',
         'create_user',
-        'modifiy_user'
+        'modify_user'
     ];
 }

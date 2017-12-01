@@ -23,6 +23,6 @@ class Article extends Model
         'content',
         'tag',
         'create_user',
-        'modifiy_user'
+        'modify_user'
     ];
 }
