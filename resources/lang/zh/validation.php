@@ -13,9 +13,9 @@ return [
     |
     */
 
-    'accepted'             => 'The :attribute must be accepted.',
-    'active_url'           => 'The :attribute is not a valid URL.',
-    'after'                => 'The :attribute must be a date after :date.',
+    'accepted'             => ':attribute 必须是要接受的.',
+    'active_url'           => ':attribute 不是有效的链接.',
+    'after'                => ':attribute 必须是 :date 之后的日期.',
     'after_or_equal'       => 'The :attribute must be a date after or equal to :date.',
     'alpha'                => 'The :attribute may only contain letters.',
     'alpha_dash'           => 'The :attribute may only contain letters, numbers, and dashes.',
