@@ -55,16 +55,35 @@ Route::group(['prefix' => 'auth','namespace' => 'Auth'],function(){
         return redirect(route('home'));
     });
 });
-
+/**
+ * 后台模块
+ */
 Route::group(['prefix' => 'admin','namespace'=>'Admin'],function(){
     //Route::get('/home', 'HomeController@index')->name('home');
+    /**
+     * 主要页面
+     */
     Route::get('/', 'AdminController@index')->name('home');
+    /**
+     * 文章页面
+     */
     Route::get('/blog', 'AdminController@blog')->name('blog');
+    /**
+     * 个人信息
+     */
     Route::get('/profile', 'AdminController@profile')->name('profile');
+    /**
+     * 添加文章
+     */
+    Route::get('/addArticle', 'AdminController@addArticle')->name('addArticle');
     Route::get('/forms', 'AdminController@forms')->name('forms');
     Route::get('/typography', 'AdminController@typography')->name('typography');
     Route::get('/bootstrapElements', 'AdminController@bootstrapElements')->name('bootstrapElements');
     Route::get('/bootstrapGrid', 'AdminController@bootstrapGrid')->name('bootstrapGrid');
 });
+Route::group(['prefix'=>'upload','namespace' => 'Upload'],function(){
+    Route::post('picture','UploadController@upload')->name('upload.picture');
+});
+
 
 

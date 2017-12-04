@@ -14,11 +14,12 @@
 
     <!-- you need to include the shieldui css and js assets in order for the charts to work -->
 
-    <link rel="stylesheet" type="text/css"
-          href="{{asset('assets/components/latest/css/light-bootstrap/all.min.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/components/latest/css/light-bootstrap/all.min.css')}}"/>
     <script type="text/javascript" src="{{asset('assets/components/latest/js/shieldui-all.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/gridData.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/echarts.min.js')}}"></script>
+
+    @yield('head')
 
 </head>
 
@@ -96,4 +97,16 @@
 </div>
 </body>
 @yield('script')
+<script>
+    var title = document.title,
+        len = title.length,
+        current = 1;
+    if(len > 6){
+        setInterval(function () {
+            current == len ? current = 0 : '';
+            document.title = title.slice(current);
+            current+=1;
+        },1000);
+    }
+</script>
 </html>

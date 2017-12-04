@@ -71,4 +71,12 @@ class AdminController extends Controller
     {
         return view('admin.bootstrapGrid',['page'=>__FUNCTION__,'title'=>'-Bootstrap 栅格系统']);
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function addArticle()
+    {
+        return view('admin.addArticle',['page'=>'blog','title'=>'-添加文章']);
+    }
 }

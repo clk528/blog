@@ -10,6 +10,27 @@
                 </ul>
                 <div class="tab-content" style="margin-top: 2rem;">
                     <div id="onsale" class="tab-pane fade in active">
+
+                        <div style="border-bottom:1px solid #e6e6e6; margin: 2rem 0 2rem 0;padding: .5rem">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                    <form class="form-inline" method="post">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="title" placeholder="标题">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary" value="搜索">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <a href="{{route('addArticle')}}" class="btn btn-warning pull-right">添加文章</a>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -19,6 +40,7 @@
                                     <th>状态</th>
                                     <th>创建时间</th>
                                     <th>修改时间</th>
+                                    <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,6 +52,10 @@
                                         <td>已发表</td>
                                         <td>{{date('Y-m-d H:i:s')}}</td>
                                         <td>{{date('Y-m-d H:i:s')}}</td>
+                                        <td>
+                                            <button class="btn btn-success btn-xs"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>
+                                            <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>下架</button>
+                                        </td>
                                     </tr>
                                 @endfor
                             </tbody>
@@ -64,6 +90,7 @@
                                 <th>状态</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -75,6 +102,10 @@
                                     <td>已下架</td>
                                     <td>{{date('Y-m-d H:i:s')}}</td>
                                     <td>{{date('Y-m-d H:i:s')}}</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>删除</button>
+                                        <button class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>编辑</button>
+                                    </td>
                                 </tr>
                             @endfor
                             </tbody>
@@ -121,7 +152,10 @@
                                     <td>待发表</td>
                                     <td>{{date('Y-m-d H:i:s')}}</td>
                                     <td>{{date('Y-m-d H:i:s')}}</td>
-                                    <td><button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>我是操作</button></td>
+                                    <td>
+                                        <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>删除</button>
+                                        <button class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>编辑</button>
+                                    </td>
                                 </tr>
                             @endfor
                             </tbody>
@@ -150,6 +184,62 @@
             </div>
 
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">News</div>
+                    <div class="panel-body">
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        .......
+                    </div>
+                    <div class="text-center">
+                        <a href="javascript:void(0);"><i class="fa fa-plus"></i>展开更多</a>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">News</div>
+                    <div class="panel-body">
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        .......
+                    </div>
+                    <div class="text-center">
+                        <a href="javascript:void(0);"><i class="fa fa-plus"></i>展开更多</a>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">News</div>
+                    <div class="panel-body">
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        我是右边。
+                        .......
+                    </div>
+                    <div class="text-center">
+                        <a href="javascript:void(0);"><i class="fa fa-plus"></i>展开更多</a>
+                    </div>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">News</div>
                     <div class="panel-body">
@@ -171,9 +261,6 @@
 
             </div>
         </div>
-
-
-
         {{--<div class="row">
             <div class="col-sm-3">
                 <div class="row">

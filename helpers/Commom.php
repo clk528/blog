@@ -48,7 +48,9 @@ if(!function_exists('password_encode'))
         return $decrypted;
     }
 }
-
+/**
+ * 下划线转驼峰
+ */
 if(!function_exists('stringToCamel'))
 {
     function stringToCamel($string)
@@ -56,5 +58,31 @@ if(!function_exists('stringToCamel'))
         return preg_replace_callback('/([-_]+([a-z]{1}))/i',function($matches){
             return strtoupper($matches[2]);
         },$string);
+    }
+}
+if(!function_exists('is_image')){
+    /**
+     * 判断文件的MIME类型是否为图片
+     * @param $mimeType
+     * @return bool
+     */
+    function is_image($mimeType)
+    {
+        return starts_with($mimeType, 'image/');
+    }
+}
+
+if(!function_exists('human_filesize')){
+    /**
+     * 返回可读性更好的文件尺寸
+     * @param $bytes
+     * @param int $decimals
+     * @return string
+     */
+    function human_filesize($bytes, $decimals = 2)
+    {
+        $size = ['B', 'kB', 'MB', 'GB', 'TB', 'PB'];
+        $factor = floor((strlen($bytes) - 1) / 3);
+        return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) .@$size[$factor];
     }
 }
