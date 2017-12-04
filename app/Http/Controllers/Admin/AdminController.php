@@ -35,9 +35,9 @@ class AdminController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function portfolio()
+    public function profile()
     {
-        return view('admin.portfolio',['page'=>__FUNCTION__,'title'=>'-个人信息']);
+        return view('admin.profile',['page'=>__FUNCTION__,'title'=>'-个人信息']);
     }
 
     /**

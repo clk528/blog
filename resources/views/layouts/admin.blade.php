@@ -39,9 +39,9 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
 
             <ul class="nav navbar-nav side-nav">
-                <li {{ $page =='index' ? 'class=active' : ''}}><a href="{{route('home')}}"><i class="fa fa-bullseye"></i> 主页</a></li>
-                <li {{ $page =='portfolio' ? 'class=active' : ''}}><a href="{{route('portfolio')}}"><i class="fa fa-tasks"></i> 个人信息</a></li>
-                <li {{ $page =='blog' ? 'class=active' : ''}}><a href="{{route('blog')}}"><i class="fa fa-globe"></i> 文章</a></li>
+                <li {{ $page =='index' ? 'class=active' : ''}}><a href="{{route('home')}}"><i class="fa fa-home"></i> 主页</a></li>
+                <li {{ $page =='profile' ? 'class=active' : ''}}><a href="{{route('profile')}}"><i class="fa fa-tasks"></i> 个人信息</a></li>
+                <li {{ $page =='blog' ? 'class=active' : ''}}><a href="{{route('blog')}}"><i class="fa fa-book"></i> 文章</a></li>
                 <li {{ $page =='forms' ? 'class=active' : ''}}><a href="{{route('forms')}}"><i class="fa fa-list-ol"></i> 表单</a></li>
                 <li {{ $page =='typography' ? 'class=active' : ''}}><a href="{{route('typography')}}"><i class="fa fa-font"></i> 字体展示</a></li>
                 <li {{ $page =='bootstrapElements' ? 'class=active' : ''}}><a href="{{route('bootstrapElements')}}"><i class="fa fa-list-ul"></i> Bootstrap 的样式</a></li>
@@ -50,7 +50,7 @@
 
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown messages-dropdown">
-                    <a href="index.html#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;"><i class="fa fa-envelope"></i>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;"><i class="fa fa-envelope"></i>
                         消息 <span class="badge" style="background:white;color: #57B779;">2</span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">2 条消息</li>
@@ -75,7 +75,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;"><i class="fa fa-user"></i> {{ Auth::user()->user }}<b
                                 class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-user"></i> 个人信息</a></li>
+                        <li><a href="{{route('profile')}}"><i class="fa fa-user"></i> 个人信息</a></li>
                         <li><a href="#"><i class="fa fa-gear"></i> 设置</a></li>
                         <li class="divider"></li>
                         <li>
