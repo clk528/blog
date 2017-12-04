@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" type="text/css" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/font-awesome/css/font-awesome.min.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/local.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/local.css')}}?v={{config('custom.static_version','1')}}"/>
 
     <script type="text/javascript" src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
