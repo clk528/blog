@@ -54,14 +54,14 @@ class UploadController extends Controller
 
         if ($result === true) {
             return $this->apiResponse->withArray([
-                'success' =>  true,
-                'message' =>  'success',
-                'url' => '/blog/imgage-upload/'.$fileName
+                'success' =>  1,
+                'message' =>  '上传成功',
+                'url' => '/blog/image-upload/'.date('Ymd').'/'.$fileName
             ]);
         }
 
         return $this->apiResponse->withArray([
-           'success' => false,
+           'success' => 0,
            'message' => $result ? : "An error occurred uploading file.",
            'url' => ''
         ]);

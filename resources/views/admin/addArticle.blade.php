@@ -7,11 +7,19 @@
 
 @section('content')
     <div id="page-wrapper">
-        <h2>添加文章 </h2>
+        <h2>添加文章 </h2><br>
+        <form class="form-inline" name="addArticle" method="post" action="{{route('saveArticle')}}">
+            <div class="form-group">
+                <label for="title">标题：</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="文章标题"><span style="color: red"> *</span>
+                <input type="hidden" name="markdown">
+                <input type="hidden" name="html">
+                {{csrf_field()}}
+            </div>
+        </form>
         <hr>
-
         <div id="test-editormd"></div>
-        <div class="text-center">
+        <div class="text-center" ng-node="operate">
             <button class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> 保存</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> 取消</button>
@@ -53,72 +61,21 @@
             imageUpload : true,
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
             imageUploadURL : "{{route('upload.picture')}}",
-            onload : function() {
-                //console.log('onload', this);
-                //this.fullscreen();
-                //this.unwatch();
-                //this.watch().fullscreen();
+        });
 
-                //this.setMarkdown("#PHP");
-                //this.width("100%");
-                //this.height(480);
-                //this.resize("100%", 640);
+        var ngNode = $("div[ng-node=operate]");
+
+        ngNode.find("button.btn-primary").on('click',function () {
+            document.getElementsByName('markdown')[0].value = '';
+            document.getElementsByName('html')[0].value = '';
+            if($.trim(document.title)==''){
+                return alert('不要忘记填写标题!');
             }
-        });
 
-        $("#goto-line-btn").bind("click", function(){
-            testEditor.gotoLine(90);
-        });
+            document.getElementsByName('markdown')[0].value = testEditor.getMarkdown();
+            document.getElementsByName('html')[0].value = testEditor.getHTML();
 
-        $("#show-btn").bind('click', function(){
-            testEditor.show();
-        });
-
-        $("#hide-btn").bind('click', function(){
-            testEditor.hide();
-        });
-
-        $("#get-md-btn").bind('click', function(){
-            alert(testEditor.getMarkdown());
-        });
-
-        $("#get-html-btn").bind('click', function() {
-            alert(testEditor.getHTML());
-        });
-
-        $("#watch-btn").bind('click', function() {
-            testEditor.watch();
-        });
-
-        $("#unwatch-btn").bind('click', function() {
-            testEditor.unwatch();
-        });
-
-        $("#preview-btn").bind('click', function() {
-            testEditor.previewing();
-        });
-
-        $("#fullscreen-btn").bind('click', function() {
-            testEditor.fullscreen();
-        });
-
-        $("#show-toolbar-btn").bind('click', function() {
-            testEditor.showToolbar();
-        });
-
-        $("#close-toolbar-btn").bind('click', function() {
-            testEditor.hideToolbar();
-        });
-
-        $("#toc-menu-btn").click(function(){
-            testEditor.config({
-                tocDropdown   : true,
-                tocTitle      : "目录 Table of Contents",
-            });
-        });
-
-        $("#toc-default-btn").click(function() {
-            testEditor.config("tocDropdown", false);
+            return addArticle.submit();
         });
     });
 </script>

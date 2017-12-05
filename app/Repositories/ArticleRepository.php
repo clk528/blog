@@ -33,6 +33,8 @@ class ArticleRepository
     public function getArticleList()
     {
         $search = request('search',[]);
+        $where = request('where',[]);
+
 
         $perPage = request('per_page',20);
 
@@ -47,7 +49,11 @@ class ArticleRepository
             $model = $model->Where($k,'like',"%{$v}%");
         });
 
-        return $model->paginate($perPage,['id','title','tag','create_user as createUser','modify_user as modifyUser','created','modified']);
+        collect($where)->each(function($v,$k) use(&$model){
+            $model = $model->Where($k,$v);
+        });
+
+        return $model->paginate($perPage,['id','title','tag','status','create_user as createUser','modify_user as modifyUser','created','modified']);
     }
 
     /**
@@ -57,7 +63,7 @@ class ArticleRepository
      */
     public function getArticle($id)
     {
-        return $this->article->whereId($id)->get(['id','title','content','tag','create_user as createUser','modify_user as modifyUser','created','modified']);
+        return $this->article->whereId($id)->get(['id','title','html','tag','create_user as createUser','modify_user as modifyUser','created','modified']);
     }
 
     /**
@@ -67,11 +73,11 @@ class ArticleRepository
     public function addArticle()
     {
         $article = [
-            'title' => '我是标题',
-            'content' => '我是文章',
-            'tag' => 'zihuan',
-            'create_user' => 'admin',
-            'modify_user' => 'admin'
+            'title' => request('title'),
+            'markdown' =>  request('markdown'),
+            'html' =>  request('html'),
+            'create_user' => \Auth::user()->user,
+            'modify_user' => \Auth::user()->user
         ];
 
         return $this->article->create($article);
@@ -83,15 +89,7 @@ class ArticleRepository
      */
     public function modifyArticle()
     {
-
-
-
-
         $article = $this->article->whereId(1)->first(['*']);
-
-
-        dd($article);
-
         if(!is_null($article)){
             return $article->update([
                 'title' => '我是标题',
@@ -101,10 +99,6 @@ class ArticleRepository
                 'modify_user' => 'admin'
             ]);
         }
-
-
-
-
         return false;
     }
 }

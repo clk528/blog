@@ -20,8 +20,10 @@ class Article extends Model
 
     protected $fillable = [
         'title',
-        'content',
+        'markdown',
+        'html',
         'tag',
+        'status',
         'create_user',
         'modify_user'
     ];

@@ -19,7 +19,7 @@ Route::group(['prefix'=>'article','namespace' => 'Article'],function(){
     /**
      * 获取文章列表
      */
-    Route::get('/getArticleList','ArticleController@getArticleList')->name('getArticleList');
+    Route::post('/getArticleList','ArticleController@getArticleList')->name('getArticleList');
     /**
      * 获取单篇文章
      */
@@ -73,9 +73,16 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin'],function(){
      */
     Route::get('/profile', 'AdminController@profile')->name('profile');
     /**
-     * 添加文章
+     * 添加文章页面
      */
     Route::get('/addArticle', 'AdminController@addArticle')->name('addArticle');
+    /**
+     * 保存文章
+     */
+    Route::post('/saveArticle', 'ArticleController@saveArticle')->name('saveArticle');
+
+
+
     Route::get('/forms', 'AdminController@forms')->name('forms');
     Route::get('/typography', 'AdminController@typography')->name('typography');
     Route::get('/bootstrapElements', 'AdminController@bootstrapElements')->name('bootstrapElements');

@@ -13,7 +13,8 @@ class create_default_config_seeder extends Seeder
     {
         $article = \App\Entities\Article::create([
             'title' => 'test',
-            'content' => '今天是:' . date('Y-m-d H:i:s') ,
+            'markdown' => '写的非常好',
+            'html' => '<p>写的非常好</p>',
             'tag' => 'test',
             'create_user' =>'admin',
             'modify_user' =>'admin',
@@ -34,9 +35,9 @@ class create_default_config_seeder extends Seeder
         ]);
 
         \App\Entities\User::create([
-            'user' => 'admin',
+            'user' => 'clk',
             'alias' => 'undefined',
-            'password' => md5('555454654465s4dfsd6f4sdfssf4974sdfs'),
+            'password' => bcrypt(123456),
             'role' => $role->id,
             'email' => 'clk528@qq.com',
             'github' => 'https://github.com/clk528',
