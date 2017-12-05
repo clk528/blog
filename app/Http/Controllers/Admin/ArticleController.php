@@ -40,4 +40,17 @@ class ArticleController extends Controller
 
         return view('admin.status',$data);
     }
+
+    public function preview($id)
+    {
+        $article = $this->articleService->getArticle($id)->toArray();
+
+        $data = [
+            'title' => $article['title'],
+            'content' => ($article['html'])
+        ];
+
+
+        return view('admin.preview',$data);
+    }
 }

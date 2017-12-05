@@ -18,6 +18,9 @@
     <script type="text/javascript" src="{{asset('assets/components/latest/js/shieldui-all.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/gridData.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/echarts.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('assets/components/layer/layer.js')}}"></script>
+
     <script>
         Date.prototype.format = function (fmt) {
             fmt = fmt || "yyyy-MM-dd hh:mm:ss";
@@ -35,6 +38,9 @@
                 if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
             return fmt;
         };
+
+        window.alert = layer.alert;
+        window.confirm = layer.confirm;
     </script>
 
     @yield('head')

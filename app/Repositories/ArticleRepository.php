@@ -63,7 +63,7 @@ class ArticleRepository
      */
     public function getArticle($id)
     {
-        return $this->article->whereId($id)->get(['id','title','html','tag','create_user as createUser','modify_user as modifyUser','created','modified']);
+        return $this->article->whereId($id)->first(['id','title','html','tag','create_user as createUser','modify_user as modifyUser','created','modified']);
     }
 
     /**
@@ -76,6 +76,7 @@ class ArticleRepository
             'title' => request('title'),
             'markdown' =>  request('markdown'),
             'html' =>  request('html'),
+            'status' => 0,
             'create_user' => \Auth::user()->user,
             'modify_user' => \Auth::user()->user
         ];

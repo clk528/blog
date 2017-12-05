@@ -80,8 +80,10 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin'],function(){
      * 保存文章
      */
     Route::post('/saveArticle', 'ArticleController@saveArticle')->name('saveArticle');
-
-
+    /**
+     * 预览界面
+     */
+    Route::get('/preview/{id}.html','ArticleController@preview')->name('preview');
 
     Route::get('/forms', 'AdminController@forms')->name('forms');
     Route::get('/typography', 'AdminController@typography')->name('typography');

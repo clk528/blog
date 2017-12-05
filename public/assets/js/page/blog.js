@@ -6,8 +6,33 @@
         this.nav.find('a:eq(2)').on('click',{that:this},this._unPublish);
     }
     Blog.prototype = {
+        _init(){
+            var that = this;
+            that._getData('/article/getArticleList',{
+                _token:token.value,
+                where:{
+                    status:1
+                },
+                page:1
+            }).then(function (data) {
+                var list = data.data.data;
+                for(var i in list){
+                    $("#onsale table tbody").append(that._template(list[i]));
+                }
+                if(data.data.total>20) {
+                    $("#onsale div[ng-node]").Pagination({
+                        itemsCount:data.data.total,
+                        pageSize:data.data.last_page,
+                        currentPage:1,
+                        onSelect:function (a) {
+                            return that._unShelf(obj,a);
+                        }
+                    });
+                }
+            });
+        },
         _onSale(obj,page){
-            var that = this|| obj.data.that,
+            var that = obj.data.that,
                 page = page || 1;
             if($("#onsale table tbody").html()!=='' && page == undefined){
                 return;
@@ -24,14 +49,16 @@
                     $("#onsale table tbody").append(that._template(list[i]));
                 }
 
-                $("#onsale div[ng-node]").Pagination({
-                    itemsCount:data.data.total,
-                    pageSize:data.data.last_page,
-                    currentPage:page,
-                    onSelect:function (a) {
-                        return that._unShelf(obj,a);
-                    }
-                });
+                if(data.data.total>20) {
+                    $("#onsale div[ng-node]").Pagination({
+                        itemsCount:data.data.total,
+                        pageSize:data.data.last_page,
+                        currentPage:1,
+                        onSelect:function (a) {
+                            return that._unShelf(obj,a);
+                        }
+                    });
+                }
             });
         },
         _unShelf(obj,page){
@@ -51,15 +78,16 @@
                 for(var i in list){
                     $("#unshelf table tbody").append(that._template(list[i]));
                 }
-
-                $("#unshelf div[ng-node]").Pagination({
-                    itemsCount:data.data.total,
-                    pageSize:data.data.last_page,
-                    currentPage:page,
-                    onSelect:function (a) {
-                        return that._unShelf(obj,a);
-                    }
-                });
+                if(data.data.total>20) {
+                    $("#unshelf div[ng-node]").Pagination({
+                        itemsCount: data.data.total,
+                        pageSize: data.data.last_page,
+                        currentPage: page,
+                        onSelect: function (a) {
+                            return that._unShelf(obj, a);
+                        }
+                    });
+                }
             });
         },
         _unPublish(obj,page){
@@ -81,15 +109,16 @@
                 for(var i in list){
                     $("#unpublish table tbody").append(that._template(list[i]));
                 }
-
-                $("#unpublish div[ng-node]").Pagination({
-                    itemsCount:data.data.total,
-                    pageSize:data.data.last_page,
-                    currentPage:page,
-                    onSelect:function (a) {
-                        return that._unPublish(obj,a);
-                    }
-                });
+                if(data.data.total>20) {
+                    $("#unpublish div[ng-node]").Pagination({
+                        itemsCount: data.data.total,
+                        pageSize: data.data.last_page,
+                        currentPage: page,
+                        onSelect: function (a) {
+                            return that._unPublish(obj, a);
+                        }
+                    });
+                }
             });
         },
         _getData(url,params){
@@ -140,5 +169,5 @@
         }
     }
     var b = new Blog();
-    b._onSale();
+    b._init();
 })(jQuery);
