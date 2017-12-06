@@ -13,7 +13,6 @@
                 <label for="title">标题：</label>
                 <input type="text" class="form-control" name="title" id="title" placeholder="文章标题"><span style="color: red"> *</span>
                 <input type="hidden" name="markdown">
-                <input type="hidden" name="html">
                 {{csrf_field()}}
             </div>
         </form>
@@ -67,14 +66,10 @@
 
         ngNode.find("button.btn-primary").on('click',function () {
             document.getElementsByName('markdown')[0].value = '';
-            document.getElementsByName('html')[0].value = '';
             if($.trim(document.title)==''){
                 return alert('不要忘记填写标题!');
             }
-
             document.getElementsByName('markdown')[0].value = testEditor.getMarkdown();
-            document.getElementsByName('html')[0].value = testEditor.getHTML();
-
             return addArticle.submit();
         });
     });

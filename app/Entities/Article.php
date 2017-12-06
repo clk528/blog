@@ -21,7 +21,6 @@ class Article extends Model
     protected $fillable = [
         'title',
         'markdown',
-        'html',
         'tag',
         'status',
         'create_user',

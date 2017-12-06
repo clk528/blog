@@ -11,30 +11,12 @@ class create_default_config_seeder extends Seeder
      */
     public function run()
     {
-        $article = \App\Entities\Article::create([
-            'title' => 'test',
-            'markdown' => '写的非常好',
-            'html' => '<p>写的非常好</p>',
-            'tag' => 'test',
-            'create_user' =>'admin',
-            'modify_user' =>'admin',
-        ]);
-
-        \App\Entities\Comment::create([
-            'cid' => 0,
-            'aid' => $article->id,
-            'content' => '写的非常好',
-            'type' => 1,
-            'create_user' =>'admin',
-            'modify_user' =>'admin'
-        ]);
-
         $role = \App\Entities\Role::create([
             'name' => '管理员',
             'description' => '这是管理员角色'
         ]);
 
-        \App\Entities\User::create([
+        $user = \App\Entities\User::create([
             'user' => 'clk',
             'alias' => 'undefined',
             'password' => bcrypt(123456),
@@ -47,6 +29,23 @@ class create_default_config_seeder extends Seeder
             'create_user' => 'system',
             'modify_user' => 'system',
             'login_time' => time()
+        ]);
+
+        $article = \App\Entities\Article::create([
+            'title' => 'test',
+            'markdown' => '# 写的非常好',
+            'tag' => 'test',
+            'create_user' =>'admin',
+            'modify_user' =>'admin',
+        ]);
+
+        \App\Entities\Comment::create([
+            'cid' => 0,
+            'aid' => $article->id,
+            'content' => '写的非常好',
+            'type' => 1,
+            'create_user' => $user->create_user,
+            'modify_user' => $user->create_user
         ]);
     }
 }

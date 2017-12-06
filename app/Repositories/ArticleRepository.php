@@ -75,7 +75,6 @@ class ArticleRepository
         $article = [
             'title' => request('title'),
             'markdown' =>  request('markdown'),
-            'html' =>  request('html'),
             'status' => 0,
             'create_user' => \Auth::user()->user,
             'modify_user' => \Auth::user()->user
