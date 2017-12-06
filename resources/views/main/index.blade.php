@@ -35,6 +35,19 @@
                     <p>LaraDocker使用过程中遇到的问题记录</p>
                 </section>
             </article>
+
+            @for($i = 1;$i<=15;$i++)
+                <article class="post">
+                    <header class="post-head"><h2 class="post-title">
+                            <a href="{{route('article.detail',['id'=>$i])}}">测试文章-大标题{{$i}}</a>
+                        </h2>
+                        <time datetime="1 week ago" class="post-time">{{$i}} week ago</time>
+                    </header>
+                    <section class="post-excerpt">
+                        <p>小标题-文章id{{$i}}</p>
+                    </section>
+                </article>
+            @endfor
         </main>
         <aside id="siderbar">
             <section class="categories">
