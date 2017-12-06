@@ -15,12 +15,16 @@ class ArticleController extends Controller
 {
     protected $articleService;
 
+
+
+
     /**
      * ArticleController constructor.
      * @param $articleService
      */
     public function __construct(ArticleService $articleService)
     {
+        $this->middleware('auth');
         $this->articleService = $articleService;
     }
 
@@ -47,7 +51,7 @@ class ArticleController extends Controller
 
         $data = [
             'title' => $article['title'],
-            'content' => ($article['html'])
+            'content' => ($article['markdown'])
         ];
 
 

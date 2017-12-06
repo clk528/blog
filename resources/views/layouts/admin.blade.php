@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>后台管理{{isset($title) ? $title : ''}}</title>
 
-    <link rel="stylesheet" type="text/css" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/font-awesome/css/font-awesome.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/local.css')}}?v={{config('custom.static_version','1')}}"/>
 
-    <script type="text/javascript" src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- you need to include the shieldui css and js assets in order for the charts to work -->
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/components/latest/css/light-bootstrap/all.min.css')}}"/>
     <script type="text/javascript" src="{{asset('assets/components/latest/js/shieldui-all.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/gridData.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/js/echarts.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/components/echarts/echarts.min.js')}}"></script>
 
     <script type="text/javascript" src="{{asset('assets/components/layer/layer.js')}}"></script>
 
