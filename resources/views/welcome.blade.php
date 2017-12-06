@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    本网站开发中。。。
+                    还在开发中！敬请谅解
                 </div>
 
                 {{--<div class="links">

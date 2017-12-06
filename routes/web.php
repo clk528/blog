@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('index');
+
+Route::group(['namespace' => 'Main'],function(){
+    Route::get('/', 'IndexController@index')->name('index');
+    Route::get('/article/{id}.nb','IndexController@article')->name('article.detail');
+});
 
 Route::group(['prefix'=>'article','namespace' => 'Article'],function(){
     /**
@@ -90,6 +92,9 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin'],function(){
     Route::get('/bootstrapElements', 'AdminController@bootstrapElements')->name('bootstrapElements');
     Route::get('/bootstrapGrid', 'AdminController@bootstrapGrid')->name('bootstrapGrid');
 });
+/**
+ * 上传模块
+ */
 Route::group(['prefix'=>'upload','namespace' => 'Upload'],function(){
     Route::post('picture','UploadController@upload')->name('upload.picture');
 });
