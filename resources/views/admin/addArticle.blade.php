@@ -16,6 +16,10 @@
                 <input type="hidden" name="html">
                 {{csrf_field()}}
             </div>
+            <div class="form-group">
+                <label for="subtitle">副标题：</label>
+                <input type="text" class="form-control" name="subtitle" id="subtitle" placeholder="副标题">
+            </div>
         </form>
         <hr>
         <div id="test-editormd"></div>

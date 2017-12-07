@@ -177,8 +177,8 @@
                             }
                         }
                     )(it.status) + '</td>' +
-                    '<td>' + (new Date(it.created * 1000)).format() + '</td>' +
-                    '<td>' + (new Date(it.modified * 1000)).format() + '</td>' +
+                    '<td>' + it.created + '</td>' +
+                    '<td>' + it.modified + '</td>' +
                     '<td>' + (function (s) {
                             if(s==0){
                                 return '<button class="btn btn-success btn-xs" style="margin-right: 5px;" ng-node="show-preview" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>' +

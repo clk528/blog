@@ -33,6 +33,10 @@ class Article extends Model
     public function getCreatedAttribute($date)
     {
         return date('Y-m-d H:i:s',$date);
-        //return Carbon::parse(date('Y-m-d H:i:s',$date))->diffForHumans();
+    }
+
+    public function getModifiedAttribute($date)
+    {
+        return date('Y-m-d H:i:s',$date);
     }
 }
