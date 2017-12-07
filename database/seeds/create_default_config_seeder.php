@@ -52,11 +52,11 @@ class create_default_config_seeder extends Seeder
 
 
         $article2 = \App\Entities\Article::create([
-            'title' => '恢复git reset后的commit',
-            'subtitle' => 'git 恢复',
+            'title' => 'PHP读取Excel的几种方式',
+            'subtitle' => 'php读取Excel',
             'markdown' => file_get_contents(base_path()."/tests/test2.md"),
             'html' => file_get_contents(base_path()."/tests/test2.html"),
-            'tag' => 'git',
+            'tag' => 'php',
             'create_user' => $user->create_user,
             'modify_user' => $user->create_user,
         ]);

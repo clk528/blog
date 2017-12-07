@@ -23,8 +23,8 @@
         <section id="content">
             <main id="main">
                 <article class="post">
-                    <header class="post-head"><h1 class="post-title">LaraDock 无法启动Mysql 解决方法</h1>
-                        <time datetime="1 week ago" class="post-time">1 week ago</time>
+                    <header class="post-head"><h1 class="post-title">{{$title}}</h1>
+                        <time datetime="{{$humanDate}}" class="post-time">{{$humanDate}}</time>
                     </header>
                     <div class="post-content">
                         <iframe onload="setIframeHeight(this)" width="100%" scrolling="yes" height="100%" frameborder="0" style="overflow: visible;" name="main" seamless="seamless" src="{{route('preview',['id'=>$id])}}"></iframe>
