@@ -13,8 +13,18 @@
 
 
 Route::group(['namespace' => 'Main'],function(){
+    /**
+     * 首页面
+     */
     Route::get('/', 'IndexController@index')->name('index');
-    Route::get('/article/{id}.nb','IndexController@article')->name('article.detail');
+    /**
+     * 文章页
+     */
+    Route::get('/article/{id}.zhuangbi','IndexController@article')->name('article.detail');
+    /**
+     * 预览界面
+     */
+    Route::get('/preview/{id}.html','IndexController@preview')->name('preview');
 });
 
 Route::group(['prefix'=>'article','namespace' => 'Article'],function(){
@@ -82,10 +92,6 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin'],function(){
      * 保存文章
      */
     Route::post('/saveArticle', 'ArticleController@saveArticle')->name('saveArticle');
-    /**
-     * 预览界面
-     */
-    Route::get('/preview/{id}.html','ArticleController@preview')->name('preview');
 
     Route::get('/forms', 'AdminController@forms')->name('forms');
     Route::get('/typography', 'AdminController@typography')->name('typography');

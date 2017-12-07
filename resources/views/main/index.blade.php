@@ -9,7 +9,7 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-    <link href="{{asset('css/home.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/home.css')}}" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -19,35 +19,31 @@
             <nav id="nav" class="clear">
                 <a href="/article/archives"><i class="iconfont icon-book"></i>Archives</a>
                 <a href="https://github.com/clk528" target="_blank"><i class="iconfont icon-github"></i>Github</a>
-                {{--<a href="https://twitter.com/csi0n"><i class="iconfont icon-facebook"></i>Facebook</a>--}}
+                <a href="https://www.facebook.com/clk528" target="_blank"><i class="iconfont icon-facebook"></i>Facebook</a>
             </nav>
         </div>
     </header>
     <section id="content">
         <main id="main" class="home">
-            <article class="post">
-                <header class="post-head"><h2 class="post-title">
-                        <a href="{{route('article.detail',['id'=>5])}}">LaraDock 无法启动Mysql 解决方法</a>
-                    </h2>
-                    <time datetime="1 week ago" class="post-time">1 week ago</time>
-                </header>
-                <section class="post-excerpt">
-                    <p>LaraDocker使用过程中遇到的问题记录</p>
-                </section>
-            </article>
-
-            @for($i = 1;$i<=15;$i++)
+            @if(!empty($data))
+                @foreach($data as $value)
                 <article class="post">
                     <header class="post-head"><h2 class="post-title">
-                            <a href="{{route('article.detail',['id'=>$i])}}">测试文章-大标题{{$i}}</a>
+                            <a href="{{route('article.detail',['id'=>$value['id']])}}">{{$value['title']}}</a>
                         </h2>
-                        <time datetime="1 week ago" class="post-time">{{$i}} week ago</time>
+                        <time datetime="{{$value['humanDate']}}" class="post-time">{{$value['humanDate']}}</time>
                     </header>
                     <section class="post-excerpt">
-                        <p>小标题-文章id{{$i}}</p>
+                        <p>{{$value['subtitle']}}</p>
                     </section>
                 </article>
-            @endfor
+                @endforeach
+            @else
+                <div style="margin-top: 100px;">
+                    <i class="material-icons md-70">呜呜呜呜</i>
+                    <p>现在还没有文章呢</p>
+                </div>
+            @endif
         </main>
         <aside id="siderbar">
             <section class="categories">
@@ -102,4 +98,14 @@
         </section>
     </footer>
 </body>
+<script src="http://blog.clk528.com/usr/themes/lpisme/js/instantclick.min.js" data-no-instant></script>
+<script data-no-instant>
+    InstantClick.on('change', function(isInitialLoad) {
+        if (isInitialLoad === false) {
+            if (typeof Prism !== 'undefined') Prism.highlightAll(true,null);
+            if (typeof ga !== 'undefined') ga('send', 'pageview', location.pathname + location.search);
+        }
+    });
+    InstantClick.init();
+</script>
 </html>

@@ -34,12 +34,13 @@ class ArticleService
 
     /**
      * 获取单篇文章
-     * @param int $id
+     * @param $id
+     * @param array $args
      * @return mixed
      */
-    public function getArticle($id)
+    public function getArticle($id,array $args = [])
     {
-        return $this->articleRepository->getArticle($id);
+        return $this->articleRepository->getArticle($id,$args);
     }
 
     /**

@@ -35,13 +35,7 @@ class ArticleRepository
         $search = request('search',[]);
         $where = request('where',[]);
 
-
         $perPage = request('per_page',20);
-
-//        $search = [
-//            'title' => 'test',
-//            'tag' => 'php'
-//        ];
 
         $model = $this->article;
 
@@ -53,17 +47,20 @@ class ArticleRepository
             $model = $model->Where($k,$v);
         });
 
-        return $model->paginate($perPage,['id','title','tag','status','create_user as createUser','modify_user as modifyUser','created','modified']);
+        return $model->paginate($perPage,['id','title','subtitle','tag','status','create_user as createUser','modify_user as modifyUser','created','modified']);
     }
 
     /**
      * 单独获取一片文章
-     * @param int $id
+     * @param $id
+     * @param array $args
      * @return mixed
      */
-    public function getArticle($id)
+    public function getArticle($id,array $args = [])
     {
-        return $this->article->whereId($id)->first(['id','title','markdown','tag','create_user as createUser','modify_user as modifyUser','created','modified']);
+        $sb = empty($args) ? ['id','title','html','tag','create_user as createUser','modify_user as modifyUser','created','modified'] : $args;
+
+        return $this->article->whereId($id)->first($sb);
     }
 
     /**
@@ -72,9 +69,12 @@ class ArticleRepository
      */
     public function addArticle()
     {
+        $title = request('title');
         $article = [
             'title' => request('title'),
+            'subtitle' =>  request('subtitle',$title),
             'markdown' =>  request('markdown'),
+            'html' => request('html'),
             'status' => 0,
             'create_user' => \Auth::user()->user,
             'modify_user' => \Auth::user()->user

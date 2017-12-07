@@ -206,7 +206,7 @@
                     move:false,
                     shade: 0.8,
                     area: ['95%', '95%'],
-                    content: '/admin/preview/'+$(this).attr('ng-id')+'.html'
+                    content: '/preview/'+$(this).attr('ng-id')+'.html'
                 });
             });
         }

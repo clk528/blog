@@ -14,10 +14,6 @@ use App\Services\ArticleService;
 class ArticleController extends Controller
 {
     protected $articleService;
-
-
-
-
     /**
      * ArticleController constructor.
      * @param $articleService
@@ -43,18 +39,5 @@ class ArticleController extends Controller
         ];
 
         return view('admin.status',$data);
-    }
-
-    public function preview($id)
-    {
-        $article = $this->articleService->getArticle($id)->toArray();
-
-        $data = [
-            'title' => $article['title'],
-            'content' => ($article['markdown'])
-        ];
-
-
-        return view('admin.preview',$data);
     }
 }

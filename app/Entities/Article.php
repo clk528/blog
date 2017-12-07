@@ -9,6 +9,7 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+//use Carbon\Carbon;
 
 class Article extends Model
 {
@@ -20,10 +21,18 @@ class Article extends Model
 
     protected $fillable = [
         'title',
+        'subtitle',
         'markdown',
+        'html',
         'tag',
         'status',
         'create_user',
         'modify_user'
     ];
+
+    public function getCreatedAttribute($date)
+    {
+        return date('Y-m-d H:i:s',$date);
+        //return Carbon::parse(date('Y-m-d H:i:s',$date))->diffForHumans();
+    }
 }

@@ -25,7 +25,6 @@ $(function () {
                 window.top.location.href = target_url;
                 return false;
             }
-
         });
 
     });
@@ -33,7 +32,7 @@ $(function () {
     if (!isMobile()) {
         $("th").css("min-width", "77px");
     }
-    ;
+
 
     $("table thead tr").css({"background-color": "#08c", "color": "#fff"});
     $("table tr").each(function () {
@@ -74,5 +73,4 @@ $(function () {
         }
 
     });
-
 })
