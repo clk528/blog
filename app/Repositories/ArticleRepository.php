@@ -37,6 +37,8 @@ class ArticleRepository
 
         $perPage = request('per_page',20);
 
+        //dd($this->article->with('category')->first(['title','id','category_id'])->toArray());
+
         $model = $this->article;
 
         collect($search)->each(function($v,$k) use(&$model){
@@ -47,7 +49,8 @@ class ArticleRepository
             $model = $model->Where($k,$v);
         });
 
-        return $model->paginate($perPage,['id','title','subtitle','tag','status','create_user as createUser','modify_user as modifyUser','created','modified']);
+
+        return $model->with('category')->paginate($perPage,['id','title','category_id','subtitle','status','create_user as createUser','modify_user as modifyUser','created','modified']);
     }
 
     /**
@@ -58,7 +61,7 @@ class ArticleRepository
      */
     public function getArticle($id,array $args = [])
     {
-        $sb = empty($args) ? ['id','title','html','tag','create_user as createUser','modify_user as modifyUser','created','modified'] : $args;
+        $sb = empty($args) ? ['id','title','html','category_id','create_user as createUser','modify_user as modifyUser','created','modified'] : $args;
 
         return $this->article->whereId($id)->first($sb);
     }
@@ -100,5 +103,62 @@ class ArticleRepository
             ]);
         }
         return false;
+    }
+    /**
+     * 上线一篇文章
+     * @param $id
+     * @return mixed
+     */
+    public function upArticle($id)
+    {
+        return $this->article->whereId($id)->update([
+            'status' => 1
+        ]);
+    }
+    /**
+     * 下线一篇文章
+     * @param integer $id
+     * @return mixed
+     */
+    public function downArticle($id)
+    {
+        return $this->article->whereId($id)->update([
+            'status' => 2
+        ]);
+    }
+    /**
+     * 删除文章
+     * @param $id
+     * @return mixed
+     */
+    public function deleteArticle($id)
+    {
+        return $this->article->whereId($id)->delete();
+    }
+
+    /**
+     * 更新文章
+     * @return bool
+     */
+    public function saveEditArticle()
+    {
+        $id = request('id','');
+        if(empty($id)){
+            return false;
+        }
+        $title = request('title','');
+        $markdown = request('markdown','');
+        $html = request('html','');
+        $subtitle = request('subtitle','');
+
+        return $this->article->whereId($id)->update([
+            'status' => 0,
+            'title' => $title,
+            'markdown' => $markdown,
+            'html' => $html,
+            'subtitle' => $subtitle,
+            'modified' => time(),
+            'modify_user' => \Auth::user()->user
+        ]);
     }
 }

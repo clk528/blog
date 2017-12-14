@@ -30,13 +30,29 @@ class Article extends Model
         'modify_user'
     ];
 
+    /**
+     * @param $date
+     * @return false|string
+     */
     public function getCreatedAttribute($date)
     {
         return date('Y-m-d H:i:s',$date);
     }
 
+    /**
+     * @param $date
+     * @return false|string
+     */
     public function getModifiedAttribute($date)
     {
         return date('Y-m-d H:i:s',$date);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function category()
+    {
+        return $this->hasOne('App\Entities\Categorie','id','category_id');
     }
 }

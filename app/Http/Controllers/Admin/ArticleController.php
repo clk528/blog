@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\ArticleService;
+use Illuminate\Routing\Router;
 
 class ArticleController extends Controller
 {
@@ -37,7 +38,30 @@ class ArticleController extends Controller
             'page'  =>  'blog',
             'article'   => $article
         ];
+        return \Redirect::route('blog');
+        //return view('admin.status',$data);
+    }
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editArticle($id)
+    {
+        $article = $this->articleService->getArticle($id,['id','title','subtitle','category_id','markdown']);
 
-        return view('admin.status',$data);
+        $data = [
+            'isEdit' => true,
+            'title' =>  '-编辑文章',
+            'page'  =>  'blog',
+            'article'   => $article
+        ];
+
+        return view('admin.addArticle',$data);
+    }
+
+    public function saveEditArticle()
+    {
+        $this->articleService->saveEditArticle();
+        return \Redirect::route('blog');
     }
 }

@@ -83,4 +83,45 @@ class ArticleController extends Controller
         $log = \DB::getQueryLog();
         dd($log);
     }
+
+    /**
+     * 下线一篇文章
+     * @param Request $request
+     * @return mixed
+     */
+    public function downArticle(Request $request)
+    {
+        $id = $request->input('id','');
+        if (empty($id)){
+            return $this->apiResponse->withArray(['code'=>0,'message'=>'去你大爷的']);
+        }
+
+        return $this->apiResponse->withArray(['code'=>$this->articleService->downArticle($id),'message'=>'成功']);
+    }
+    /**
+     * 上线一篇文章
+     * @param Request $request
+     * @return mixed
+     */
+    public function upArticle(Request $request)
+    {
+        $id = $request->input('id','');
+        if (empty($id)){
+            return $this->apiResponse->withArray(['code'=>0,'message'=>'去你大爷的']);
+        }
+        return $this->apiResponse->withArray(['code'=>$this->articleService->upArticle($id),'message'=>'成功']);
+    }
+    /**
+     * 删除文章
+     * @param Request $request
+     * @return mixed
+     */
+    public function deleteArticle(Request $request)
+    {
+        $id = $request->input('id','');
+        if (empty($id)){
+            return $this->apiResponse->withArray(['code'=>0,'message'=>'去你大爷的']);
+        }
+        return $this->apiResponse->withArray(['code'=>$this->articleService->deleteArticle($id),'message'=>'成功']);
+    }
 }

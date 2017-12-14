@@ -10,22 +10,35 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 
 use App\Services\ArticleService;
+use App\Services\CategoryService;
+use App\Services\TagService;
 use Carbon\Carbon;
 
 class IndexController extends Controller
 {
     /**
-     * @var ArticleService3
+     * @var ArticleService
      */
     protected $articleService;
-
+    /**
+     * @var CategoryService
+     */
+    protected $categoryService;
+    /**
+     * @var TagService
+     */
+    protected $tagService;
     /**
      * IndexController constructor.
      * @param ArticleService $articleService
+     * @param CategoryService $categoryService
+     * @param TagService $tagService
      */
-    public function __construct(ArticleService $articleService )
+    public function __construct(ArticleService $articleService ,CategoryService $categoryService ,TagService $tagService)
     {
         $this->articleService = $articleService;
+        $this->categoryService = $categoryService;
+        $this->tagService = $tagService;
     }
 
     /**
@@ -33,8 +46,13 @@ class IndexController extends Controller
      */
     function index()
     {
-        request()->replace(['where'=>['status'=>0]]);
-        $articleList = $this->articleService->getArticleList();
+        request()->replace(['where'=>['status'=>1]]);
+
+        $articleList = $this->articleService->getArticleList(); //获取文章
+
+        $Categories = $this->categoryService->getCategories();//获取类别
+
+        $tag = $this->tagService->getTag();//获取标签
 
         if(!$articleList->isEmpty()){
             $articleList->map(function($item){
@@ -42,7 +60,12 @@ class IndexController extends Controller
             });
         }
 
-        return view('main.index',$articleList);
+        $data = [
+            'categories' => $Categories,
+            'tags' => $tag,
+        ];
+
+        return view('main.index',array_merge($data,$articleList->toArray()));
     }
     /**
      * @param $id
@@ -50,7 +73,7 @@ class IndexController extends Controller
      */
     function article($id)
     {
-        $article = $this->articleService->getArticle($id,['id','title','tag','create_user as createUser','modify_user as modifyUser','created','modified']);
+        $article = $this->articleService->getArticle($id,['id','title','category_id','create_user as createUser','modify_user as modifyUser','created','modified']);
 
         $article->humanDate = Carbon::parse($article->created)->diffForHumans();
 

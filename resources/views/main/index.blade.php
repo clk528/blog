@@ -48,44 +48,15 @@
         <aside id="siderbar">
             <section class="categories">
                 <h3 class="aside-title"><i class="iconfont icon-folder-open-o"></i> Categories</h3>
-                <a class="tag" href="/cate/2" title="Android">Android</a>
-                <a class="tag" href="/cate/3" title="IOS">IOS</a>
-                <a class="tag" href="/cate/4" title="C#">C#</a>
-                <a class="tag" href="/cate/5" title="Python">Python</a>
-                <a class="tag" href="/cate/6" title="Life">Life</a>
-                <a class="tag" href="/cate/7" title="PHP">PHP</a>
-                <a class="tag" href="/cate/8" title="大数据">大数据</a>
-                <a class="tag" href="/cate/9" title="杂谈">杂谈</a>
-                <a class="tag" href="/cate/10" title="前端">前端</a>
-                <a class="tag" href="/cate/11" title="Mac">Mac</a>
-                <a class="tag" href="/cate/12" title="其他">其他</a>
-                <a class="tag" href="/cate/13" title="WordPress">WordPress</a>
-                <a class="tag" href="/cate/14" title="服务器">服务器</a>
-                <a class="tag" href="/cate/15" title="笔记">笔记</a>
+                @foreach($categories as $id=>$value)
+                    <a class="tag" href="/cate/{{$id}}" title="{{$value['name']}}">{{$value['name']}}</a>
+                @endforeach
             </section>
             <section class="tags">
                 <h3 class="aside-title"><i class="iconfont icon-tags"></i>Tags</h3>
-                <a class="tag" href="/tag/1" title="PHP">PHP</a>
-                <a class="tag" href="/tag/2" title="Android">Android</a>
-                <a class="tag" href="/tag/3" title="Python">Python</a>
-                <a class="tag" href="/tag/4" title="C#">C#</a>
-                <a class="tag" href="/tag/5" title="大数据">大数据</a>
-                <a class="tag" href="/tag/6" title="Spark">Spark</a>
-                <a class="tag" href="/tag/7" title="IOS">IOS</a>
-                <a class="tag" href="/tag/8" title="杂谈">杂谈</a>
-                <a class="tag" href="/tag/9" title="Git">Git</a>
-                <a class="tag" href="/tag/10" title="GO">GO</a>
-                <a class="tag" href="/tag/11" title="树莓派">树莓派</a>
-                <a class="tag" href="/tag/12" title="HomeKit">HomeKit</a>
-                <a class="tag" href="/tag/13" title="智能家居">智能家居</a>
-                <a class="tag" href="/tag/14" title="Cydia">Cydia</a>
-                <a class="tag" href="/tag/15" title="越狱">越狱</a>
-                <a class="tag" href="/tag/16" title="前端">前端</a>
-                <a class="tag" href="/tag/17" title="JS">JS</a>
-                <a class="tag" href="/tag/18" title="Mac">Mac</a>
-                <a class="tag" href="/tag/19" title="黑苹果">黑苹果</a>
-                <a class="tag" href="/tag/20" title="WordPress">WordPress</a>
-                <a class="tag" href="/tag/21" title="Hyper-V">Hyper-V</a>
+                @foreach($tags as $id=>$value)
+                    <a class="tag" href="/tag/{{$id}}" title="{{$value['name']}}">{{$value['name']}}</a>
+                @endforeach
             </section>
             {{--<section class="friends">
                 <h3 class="aside-title"><i class="iconfont icon-group"></i> Friends</h3>

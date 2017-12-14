@@ -35,7 +35,7 @@
                                 <tr>
                                     <th>文章ID</th>
                                     <th>标题</th>
-                                    <th>标签</th>
+                                    <th>分类</th>
                                     <th>状态</th>
                                     <th>创建时间</th>
                                     <th>修改时间</th>
@@ -52,7 +52,7 @@
                             <tr>
                                 <th>文章ID</th>
                                 <th>标题</th>
-                                <th>标签</th>
+                                <th>分类</th>
                                 <th>状态</th>
                                 <th>创建时间</th>
                                 <th>修改时间</th>

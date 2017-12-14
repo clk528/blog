@@ -44,7 +44,7 @@
             var that = obj.data.that,
                 page = page || 1;
             if($("#onsale table tbody").html()!=='' && page == undefined){
-                return;
+               // return;
             }
             that._getData('/article/getArticleList',{
                 _token:token.value,
@@ -79,7 +79,7 @@
         },
         _unShelf(obj,page){
             if($("#unshelf table tbody").html()!=='' && page == undefined){
-                return;
+                //return;
             }
             var that = obj.data.that,
                 page = page || 1;
@@ -115,7 +115,7 @@
         },
         _unPublish(obj,page){
             if($("#unpublish table tbody").html()!=='' && page == undefined){
-                return;
+                //return;
             }
             var that = obj.data.that,
                 page = page || 1;
@@ -164,7 +164,7 @@
                 '<tr>'+
                     '<td>' + it.id + '</td>' +
                     '<td>' + it.title +'</td>' +
-                    '<td>' + it.tag +'</td>' +
+                    '<td>' + it.category.name +'</td>' +
                     '<td>' + (function (s) {
                             if(s==0){
                                 return '待发表';
@@ -182,22 +182,53 @@
                     '<td>' + (function (s) {
                             if(s==0){
                                 return '<button class="btn btn-success btn-xs" style="margin-right: 5px;" ng-node="show-preview" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>' +
-                                    '<button class="btn btn-info btn-xs" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>发表</button>';
+                                    '<button class="btn btn-info btn-xs" style="margin-right: 5px;" ng-node="edit" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>编辑</button>' +
+                                    '<button class="btn btn-primary btn-xs" ng-node="up-shelf" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>发表</button>';
                             }
                             if(s==1){
-                                return '<button class="btn btn-primary btn-xs" style="margin-right: 5px;" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>查看</button>' +
-                                    '<button class="btn btn-warning btn-xs" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>下架</button>';
+                                return '<button class="btn btn-success btn-xs" style="margin-right: 5px;" ng-node="show-preview" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>' +
+                                    '<button class="btn btn-warning btn-xs" style="margin-right: 5px;" ng-node="down-shelf" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>下架</button>';
                             }
                             if(s==2){
-                                return '<button class="btn btn-danger btn-xs" style="margin-right: 5px;" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>删除</button>' +
-                                    '<button class="btn btn-info btn-xs" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>编辑</button>';
+                                return '<button class="btn btn-danger btn-xs" style="margin-right: 5px;" ng-node="delete" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>删除</button>' +
+                                    '<button class="btn btn-info btn-xs" style="margin-right: 5px;" ng-node="edit" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>编辑</button>' +
+                                    '<button class="btn btn-primary btn-xs" ng-node="up-shelf" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>发表</button>';
                             }
                         })(it.status) +
                     '</td>' +
                 '</tr>';
             return str;
         },
+        _downShelf(id){
+            var that = this;
+            that._getData('/article/downArticle',{
+                _token:token.value,
+                id:id
+            }).then(function (data) {
+                layer.msg(data.message);
+            });
+        },
+        _upShelf(id){
+            var that = this;
+            that._getData('/article/upArticle',{
+                _token:token.value,
+                id:id
+            }).then(function (data) {
+                layer.msg(data.message);
+            });
+        },
+        _delete(id){
+            var that = this;
+            that._getData('/article/deleteArticle',{
+                _token:token.value,
+                id:id
+            }).then(function (data) {
+                layer.msg(data.message);
+            });
+        },
         _event(){
+            var that = this;
+            //preview
             $(document).on('click','button[ng-node=show-preview]',function () {
                 layer.open({
                     type: 2,
@@ -208,6 +239,46 @@
                     area: ['95%', '95%'],
                     content: '/preview/'+$(this).attr('ng-id')+'.html'
                 });
+            });
+            //down-shelf
+            $(document).on('click','button[ng-node=down-shelf]',function () {
+                var articleId = $(this).attr('ng-id');
+                return confirm('确定下线文章？', {
+                    btn: ['确定','算了'], //按钮
+                    title:'提示',
+                    shadeClose: true,
+                    move:false,
+                }, function(){
+                    return that._downShelf(articleId)
+                });
+            });
+            //up-shelf
+            $(document).on('click','button[ng-node=up-shelf]',function () {
+                var articleId = $(this).attr('ng-id');
+                return confirm('确定上线文章？', {
+                    btn: ['确定','算了'], //按钮
+                    title:'提示',
+                    shadeClose: true,
+                    move:false,
+                }, function(){
+                    return that._upShelf(articleId)
+                });
+            });
+            //delete
+            $(document).on('click','button[ng-node=delete]',function () {
+                var articleId = $(this).attr('ng-id');
+                return confirm('确定删除文章？', {
+                    btn: ['确定','算了'], //按钮
+                    title:'提示',
+                    shadeClose: true,
+                    move:false,
+                }, function(){
+                    return that._delete(articleId)
+                });
+            });
+            //edit
+            $(document).on('click','button[ng-node=edit]',function () {
+                return location.href = "/admin/editArticle/"+$(this).attr('ng-id');
             });
         }
     }

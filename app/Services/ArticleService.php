@@ -60,4 +60,42 @@ class ArticleService
     {
         return $this->articleRepository->modifyArticle();
     }
+
+    /**
+     * 下线一篇文章
+     * @param integer $id
+     * @return mixed
+     */
+    public function downArticle($id)
+    {
+        return $this->articleRepository->downArticle($id);
+    }
+
+    /**
+     * 上线一篇文章
+     * @param $id
+     * @return mixed
+     */
+    public function upArticle($id)
+    {
+        return $this->articleRepository->upArticle($id);
+    }
+    /**
+     * 删除文章
+     * @param integer $id
+     * @return mixed
+     */
+    public function deleteArticle($id)
+    {
+        return $this->articleRepository->deleteArticle($id);
+    }
+
+    /**
+     * 更新文章
+     * @return bool
+     */
+    public function saveEditArticle()
+    {
+        return $this->articleRepository->saveEditArticle();
+    }
 }
