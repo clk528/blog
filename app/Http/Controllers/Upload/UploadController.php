@@ -20,12 +20,10 @@ class UploadController extends Controller
      * @var UploadService
      */
     protected $uploadService;
-
     /**
      * @var ArticleService3
      */
     protected $articleService;
-
     /**
      * UploadController constructor.
      * @param UploadService $uploadService
@@ -35,7 +33,11 @@ class UploadController extends Controller
         $this->uploadService = $uploadService;
         $this->apiResponse = $apiResponse;
     }
-
+    /**
+     * 上传一张图片
+     * @param Request $request
+     * @return mixed
+     */
     public function upload(Request $request)
     {
         $file = $_FILES['editormd-image-file'];
@@ -43,7 +45,7 @@ class UploadController extends Controller
         $fileName = $request->get('file_name');
         $fileName = $fileName ?: $file['name'];
 
-        $content = File::get($file['tmp_name']);
+        $content = \File::get($file['tmp_name']);
 
 
         $path = "images/".date('Ymd');

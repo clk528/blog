@@ -121,18 +121,17 @@ $chunkSize = 20;    // 定义每块读去的行数
 
 // 就可在一个循环中，多次读去块，而不用一次性将整个Excel表读入到内存中
 for ($startRow = 2; $startRow <= 240; $startRow += $chunkSize) {
-$chunkFilter = new chunkReadFilter($startRow, $chunkSize);
-$objReader->setReadFilter($chunkFilter);    // 设置实例化的过滤器对象
-$objPHPExcel = $objReader->load($inputFileName);
-// 开始读取每行数据，并插入到数据库
+    $chunkFilter = new chunkReadFilter($startRow, $chunkSize);
+    $objReader->setReadFilter($chunkFilter);// 设置实例化的过滤器对象
+    $objPHPExcel = $objReader->load($inputFileName);// 开始读取每行数据，并插入到数据库
 }
 ```
 ### 12.分块读取Excel的第2个版本
 ```php
 class chunkReadFilter implements PHPExcel_Reader_IReadFilter
 {
-	private $_startRow = 0;        // 开始行
-	private $_endRow = 0;        // 结束行
+	private $_startRow = 0;// 开始行
+	private $_endRow = 0;// 结束行
 	
 	// 定义了一个读去指定范围行的方法
 	public function setRows($startRow, $chunkSize) {
@@ -147,7 +146,7 @@ class chunkReadFilter implements PHPExcel_Reader_IReadFilter
 	}
 }
 $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-$chunkSize = 20;    // 定义每块读去的行数
+$chunkSize = 20;// 定义每块读去的行数
 
 
 // 在循环外部，实例化过滤器类，而不用循环内每次实例化(应该更优化)

@@ -50,16 +50,12 @@ button, img, input:not([type=radio]):not([type=checkbox]), select {
     display: inline-block
 }
 
-#content, #header-warp {
-    width: 90%;
-    max-width: 1000px
-}
-
 #footer, #header-warp, svg:not(:root) {
     overflow: hidden
 }
 
-#content, #footer, #header-warp {
+#content, #footer{
+    width: 90%;
     max-width: 1000px
 }
 
@@ -359,16 +355,25 @@ blockquote p:last-of-type {
     top: 0;
     right: 0;
     left: 0;
-    box-shadow: 0 0 1px rgba(0, 0, 0, .15)
+    box-shadow: 0 0 1px rgba(0, 0, 0, .15);
+    border-bottom: 1px solid #e1e2e3;
 }
 
 #header-warp {
     line-height: 65px;
-    height: 65px
+    height: 65px;
+    width: 90%;
+    max-width: 1000px
+}
+
+#header-warp .right {
+    border-right: 1px solid #ddd;
 }
 
 #logo {
-    float: left
+    float: left;
+    border-right: 1px solid #ddd;
+    padding-right: .5rem;
 }
 
 #logo > a {
@@ -415,7 +420,10 @@ blockquote p:last-of-type {
     width: 74%;
     float: left
 }
-
+#page_md_content{
+    padding: 100px;
+    max-width: 1000px;
+}
 @media only screen and (max-width: 750px) {
     #main.home {
         width: 100%
@@ -431,7 +439,7 @@ blockquote p:last-of-type {
     content: ''
 }
 
-#siderbar {
+#sidebar {
     width: 24%;
     float: right;
     padding-top: 40px
@@ -443,9 +451,11 @@ blockquote p:last-of-type {
     font-weight: 300;
     border-bottom: 1px solid #ddd
 }
-
+.slogan {
+    margin-left: .5rem;
+}
 @media only screen and (max-width: 750px) {
-    #siderbar {
+    #sidebar {
         display: none
     }
 }
@@ -633,11 +643,6 @@ code, pre {
     content: ' '
 }
 
-.friends a, .tags > a, .categories > a {
-    display: inline-block;
-    font-size: 13px
-}
-
 .highlight figcaption:after {
     clear: both
 }
@@ -645,6 +650,9 @@ code, pre {
 .highlight figcaption a {
     float: right
 }
+
+*/
+
 
 pre .line {
     height: 20px
@@ -678,10 +686,13 @@ pre .javascript .function, pre .keyword {
     color: #8959a8
 }
 
-
-
 .friends {
     margin-top: 30px
+}
+
+.friends a, .tags > a, .categories > a {
+    display: inline-block;
+    font-size: 13px
 }
 
 .categories a {
@@ -698,7 +709,7 @@ pre .javascript .function, pre .keyword {
     margin-right: 10px;
     color: #777
 }
-*/
+
 .tags {
     margin-top: 30px;
     display: inline-block;
@@ -789,12 +800,12 @@ pre .javascript .function, pre .keyword {
 }
 
 @font-face {
-    font-family: 'iconfont';  /* project id 499971 */
-    src: url('//at.alicdn.com/t/font_499971_6uwe2m4yi4x9lik9.eot');
-    src: url('//at.alicdn.com/t/font_499971_6uwe2m4yi4x9lik9.eot?#iefix') format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_499971_6uwe2m4yi4x9lik9.woff') format('woff'),
-    url('//at.alicdn.com/t/font_499971_6uwe2m4yi4x9lik9.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_499971_6uwe2m4yi4x9lik9.svg#iconfont') format('svg');
+    font-family: 'iconfont';  /* project id 510265 */
+    src: url('//at.alicdn.com/t/font_510265_9uzw12mlrhi1kyb9.eot');
+    src: url('//at.alicdn.com/t/font_510265_9uzw12mlrhi1kyb9.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_510265_9uzw12mlrhi1kyb9.woff') format('woff'),
+    url('//at.alicdn.com/t/font_510265_9uzw12mlrhi1kyb9.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_510265_9uzw12mlrhi1kyb9.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -808,11 +819,11 @@ pre .javascript .function, pre .keyword {
 }
 
 .icon-facebook::before {
-    content: "\e64a";
+    content: "\ee78";
 }
 
 .icon-github::before {
-    content: "\e63b"
+    content: "\e7dd"
 }
 
 .icon-tags::before {
@@ -820,7 +831,7 @@ pre .javascript .function, pre .keyword {
 }
 
 .icon-home::before {
-    content: "\e601"
+    content: "\e9bb"
 }
 
 .icon-group::before {
@@ -828,7 +839,7 @@ pre .javascript .function, pre .keyword {
 }
 
 .icon-folder-open-o::before {
-    content: "\e62b"
+    content: "\e710"
 }
 
 .icon-book::before {

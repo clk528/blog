@@ -21,10 +21,6 @@ Route::group(['namespace' => 'Main'],function(){
      * 文章页
      */
     Route::get('/article/{id}.zhuangbi','IndexController@article')->name('article.detail');
-    /**
-     * 预览界面
-     */
-    Route::get('/preview/{id}.html','IndexController@preview')->name('preview');
 });
 /**
  * 文章管理模块，是给ajax和未来API用的地方
@@ -112,8 +108,18 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin'],function(){
      * 进入编辑页面
      */
     Route::get('/editArticle/{id}','ArticleController@editArticle')->name('editArticle');
-
+    /**
+     * 保存编辑
+     */
     Route::post('/saveEditArticle','ArticleController@saveEditArticle')->name('saveEditArticle');
+    /**
+     * 预览文章
+     */
+    /**
+     * 预览界面
+     */
+    Route::get('/preview/{id}.html','ArticleController@preview')->name('preview');
+
 
     Route::get('/forms', 'AdminController@forms')->name('forms');
     Route::get('/typography', 'AdminController@typography')->name('typography');

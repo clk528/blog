@@ -61,7 +61,7 @@ class ArticleRepository
      */
     public function getArticle($id,array $args = [])
     {
-        $sb = empty($args) ? ['id','title','html','category_id','create_user as createUser','modify_user as modifyUser','created','modified'] : $args;
+        $sb = empty($args) ? ['id','status','title','html','category_id','create_user as createUser','modify_user as modifyUser','created','modified'] : $args;
 
         return $this->article->whereId($id)->first($sb);
     }

@@ -26,6 +26,16 @@ class ArticleController extends Controller
     }
 
     /**
+     * 预览文章
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function preview($id)
+    {
+        $article = $this->articleService->getArticle($id,['title','html']);
+        return view('admin.preview',$article);
+    }
+    /**
      *  保存文章
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -33,15 +43,16 @@ class ArticleController extends Controller
     {
         $article = $this->articleService->addArticle();
 
-        $data = [
-            'title' =>  '添加成功',
-            'page'  =>  'blog',
-            'article'   => $article
-        ];
+//        $data = [
+//            'title' =>  '添加成功',
+//            'page'  =>  'blog',
+//            'article'   => $article
+//        ];
         return \Redirect::route('blog');
         //return view('admin.status',$data);
     }
     /**
+     * 进入编辑页
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -59,6 +70,10 @@ class ArticleController extends Controller
         return view('admin.addArticle',$data);
     }
 
+    /**
+     * 保存编辑
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function saveEditArticle()
     {
         $this->articleService->saveEditArticle();

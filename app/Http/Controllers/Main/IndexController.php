@@ -42,6 +42,7 @@ class IndexController extends Controller
     }
 
     /**
+     * 文章的首页列表
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     function index()
@@ -68,26 +69,16 @@ class IndexController extends Controller
         return view('main.index',array_merge($data,$articleList->toArray()));
     }
     /**
+     * 文章详情页
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     function article($id)
     {
-        $article = $this->articleService->getArticle($id,['id','title','html','created']);
+        $article = $this->articleService->getArticle($id,['id','status','title','html','created']);
 
         $article->humanDate = Carbon::parse($article->created)->diffForHumans();
 
-        return view('main.article2',$article);
-    }
-
-    /**
-     * 预览页面
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function preview($id)
-    {
-        $article = $this->articleService->getArticle($id,['title','html'])->toArray();
-        return view('main.preview',$article);
+        return view('main.article',$article);
     }
 }
