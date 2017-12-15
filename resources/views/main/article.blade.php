@@ -1,6 +1,6 @@
 @extends('layouts.blog.blog')
 @section('head')
-    <link href="{{asset('css/markdown.css')}}?v={{time()}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/markdown.css')}}" rel="stylesheet" type="text/css">
     <link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/KaTeX/0.9.0-alpha2/katex.min.css">
     <script src="//cdn.bootcss.com/KaTeX/0.9.0-alpha2/katex.min.js"></script>
 @endsection
@@ -22,5 +22,5 @@
     </main>
 @endsection
 @section('foot')
-<script src="{{asset('assets/js/page/article.js')}}"></script>
+<script src="{{asset('assets/js/page/article.min.js')}}"></script>
 @endsection
