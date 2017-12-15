@@ -11,6 +11,9 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <link href="{{asset('css/home.css')}}" rel="stylesheet" type="text/css">
 
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{asset('assets/components/layer/layer.js')}}"></script>
+
 </head>
 <body>
     <header id="header">
@@ -79,4 +82,22 @@
     });
     InstantClick.init();
 </script>--}}
+<script>
+    layer.photos({
+        photos: {
+            "title": "扫码得红包",
+            "id": 123,
+            "start": 0,
+            "data": [
+                {
+                    "alt": "扫码得红包",
+                    "pid": 666, //图片id
+                    "src": "http://cdn.clk528.com/temp/alipay.png?x-oss-process=image/resize,w_350,limit_0",
+                    "thumb": "http://cdn.clk528.com/temp/alipay.png?x-oss-process=image/resize,w_350,limit_0"
+                }
+            ]
+        },
+        anim: 5
+    });
+</script>
 </html>
