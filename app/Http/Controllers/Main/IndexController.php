@@ -73,11 +73,11 @@ class IndexController extends Controller
      */
     function article($id)
     {
-        $article = $this->articleService->getArticle($id,['id','title','category_id','create_user as createUser','modify_user as modifyUser','created','modified']);
+        $article = $this->articleService->getArticle($id,['id','title','html','created']);
 
         $article->humanDate = Carbon::parse($article->created)->diffForHumans();
 
-        return view('main.article',$article);
+        return view('main.article2',$article);
     }
 
     /**

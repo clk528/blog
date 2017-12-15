@@ -69,7 +69,7 @@
         </section>
     </footer>
 </body>
-<script src="http://blog.clk528.com/usr/themes/lpisme/js/instantclick.min.js" data-no-instant></script>
+{{--<script src="http://blog.clk528.com/usr/themes/lpisme/js/instantclick.min.js" data-no-instant></script>
 <script data-no-instant>
     InstantClick.on('change', function(isInitialLoad) {
         if (isInitialLoad === false) {
@@ -78,5 +78,5 @@
         }
     });
     InstantClick.init();
-</script>
+</script>--}}
 </html>
