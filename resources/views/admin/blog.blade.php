@@ -164,6 +164,6 @@
     </div>
 @endsection
 @section('script')
-<script src="{{asset('assets/js/page/blog.min.js')}}"></script>
+<script src="{{asset('assets/js/page/blog.js')}}"></script>
 <script src="{{asset('assets/components/pagination/pagination.min.js')}}"></script>
 @endsection

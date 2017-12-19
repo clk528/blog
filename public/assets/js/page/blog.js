@@ -4,7 +4,6 @@
         this.nav.find('a:eq(0)').on('click',{that:this},this._onSale);
         this.nav.find('a:eq(1)').on('click',{that:this},this._unShelf);
         this.nav.find('a:eq(2)').on('click',{that:this},this._unPublish);
-
     }
     Blog.prototype = {
         _init(){
@@ -161,7 +160,7 @@
         },
         _template(it){
             var str = '' +
-                '<tr>'+
+                '<tr article-id="' + it.id + '">'+
                     '<td>' + it.id + '</td>' +
                     '<td>' + it.title +'</td>' +
                     '<td>' + it.category.name +'</td>' +
@@ -199,86 +198,68 @@
                 '</tr>';
             return str;
         },
-        _downShelf(id){
-            var that = this;
-            that._getData('/article/downArticle',{
-                _token:token.value,
-                id:id
-            }).then(function (data) {
-                layer.msg(data.message);
-            });
-        },
-        _upShelf(id){
-            var that = this;
-            that._getData('/article/upArticle',{
-                _token:token.value,
-                id:id
-            }).then(function (data) {
-                layer.msg(data.message);
-            });
-        },
-        _delete(id){
-            var that = this;
-            that._getData('/article/deleteArticle',{
-                _token:token.value,
-                id:id
-            }).then(function (data) {
-                layer.msg(data.message);
-            });
-        },
         _event(){
-            var that = this;
-            //preview
-            $(document).on('click','button[ng-node=show-preview]',function () {
-                layer.open({
-                    type: 2,
-                    title: $(this).attr('ng-title'),
-                    shadeClose: true,
-                    move:false,
-                    shade: 0.8,
-                    area: ['95%', '95%'],
-                    content: '/admin/preview/'+$(this).attr('ng-id')+'.html'
-                });
-            });
-            //down-shelf
-            $(document).on('click','button[ng-node=down-shelf]',function () {
-                var articleId = $(this).attr('ng-id');
-                return confirm('确定下线文章？', {
-                    btn: ['确定','算了'], //按钮
-                    title:'提示',
-                    shadeClose: true,
-                    move:false,
-                }, function(){
-                    return that._downShelf(articleId)
-                });
-            });
-            //up-shelf
-            $(document).on('click','button[ng-node=up-shelf]',function () {
-                var articleId = $(this).attr('ng-id');
-                return confirm('确定上线文章？', {
-                    btn: ['确定','算了'], //按钮
-                    title:'提示',
-                    shadeClose: true,
-                    move:false,
-                }, function(){
-                    return that._upShelf(articleId)
-                });
-            });
-            //delete
-            $(document).on('click','button[ng-node=delete]',function () {
-                var articleId = $(this).attr('ng-id');
-                return confirm('确定删除文章？', {
-                    btn: ['确定','算了'], //按钮
-                    title:'提示',
-                    shadeClose: true,
-                    move:false,
-                }, function(){
-                    return that._delete(articleId)
-                });
-            });
-            //edit
-            $(document).on('click','button[ng-node=edit]',function () {
-                return location.href = "/admin/editArticle/"+$(this).attr('ng-id');
+            var self = this;
+            $(document).on('click','button[ng-node]',function () {
+                var articleId = $(this).attr('ng-id'),
+                    node = $(this).attr('ng-node'),
+                    title = $(this).attr('ng-title'),
+                    that = this;
+
+                var msg = api = null;
+
+                if(node == 'show-preview'){
+                    return layer.open({
+                        type: 2,
+                        title: title,
+                        shadeClose: true,
+                        move:false,
+                        shade: 0.8,
+                        area: ['95%', '95%'],
+                        content: '/admin/preview/' + articleId +'.html'
+                    });
+                }
+
+                if(node == 'show-preview'){
+                    return location.href = "/admin/editArticle/" + articleId;
+                }
+
+                switch (node){
+                    case 'down-shelf':
+                        msg = '确定下线文章？';
+                        api = '/article/downArticle';
+                        break;
+                    case 'up-shelf':
+                        msg = '确定上线文章？';
+                        api = '/article/upArticle';
+                        break;
+                    case 'delete':
+                        msg = '确定删除文章？';
+                        api = '/article/deleteArticle';
+                        break;
+                    default:break;
+                }
+
+                if(msg != null && api != null){
+                    return confirm(msg, {
+                        btn: ['确定','算了'], //按钮
+                        title:'提示',
+                        shadeClose: true,
+                        move:false,
+                    }, function(){
+                        self._getData(api,{
+                            _token:token.value,
+                            id:articleId
+                        }).then(function (data) {
+                            layer.msg(data.message);
+                            var tbody = $(that).parents('tbody');
+                            $(that).parents('tr').remove();
+                            if(tbody.html()==''){
+                                tbody.html('<tr><td  colspan="7"><div class="alert alert-success" role="alert"><a href="#" class="alert-link">暂无已发表的文章！</a></div></td></tr>');
+                            }
+                        });
+                    });
+                }
             });
         }
     }

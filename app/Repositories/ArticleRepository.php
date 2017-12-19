@@ -50,7 +50,9 @@ class ArticleRepository
         });
 
 
-        return $model->with('category')->paginate($perPage,['id','title','category_id','subtitle','status','create_user as createUser','modify_user as modifyUser','created','modified']);
+        return $model->with(['category'=>function($query){
+            return $query->select(['id','name']);
+        }])->paginate($perPage,['id','title','category_id','subtitle','status','create_user as createUser','modify_user as modifyUser','created','modified']);
     }
 
     /**
@@ -78,10 +80,13 @@ class ArticleRepository
             'subtitle' =>  request('subtitle',$title),
             'markdown' =>  request('markdown'),
             'html' => request('html'),
+            'category_id' => request('category',1),
             'status' => 0,
             'create_user' => \Auth::user()->user,
             'modify_user' => \Auth::user()->user
         ];
+
+        //dd($article);
 
         return $this->article->create($article);
     }

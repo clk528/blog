@@ -10,8 +10,8 @@
         <h2>{{isset($isEdit) ? '编辑文章':'添加文章'}} </h2><br>
         <form class="form-inline" name="addArticle" method="post" action="{{isset($isEdit) ? route('saveEditArticle'):route('saveArticle')}}">
             <div class="form-group">
-                <label for="title">标题：</label>
-                <input type="text" class="form-control" name="title" id="title" placeholder="文章标题" value="{{isset($isEdit) ? $article['title'] : ''}}"><span style="color: red"> *</span>
+                <label for="title">标题(<span style="color: red"> *</span>)：</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="文章标题" value="{{isset($isEdit) ? $article['title'] : ''}}">
                 <input type="hidden" name="markdown">
                 <input type="hidden" name="html">
                 @if(isset($isEdit))
@@ -20,8 +20,40 @@
                 {{csrf_field()}}
             </div>
             <div class="form-group">
-                <label for="subtitle">副标题：</label>
+                <label for="subtitle">副标题(<span style="color: red"> *</span>)：</label>
                 <input type="text" class="form-control" name="subtitle" id="subtitle" placeholder="副标题"  value="{{isset($isEdit) ? $article['subtitle'] : ''}}">
+            </div>
+            <div class="form-group">
+                <label for="category">分类(<span style="color: red"> *</span>)：</label>
+                <select id="category" class="form-control" name="category">
+                    <option selected value="">选择分类</option>
+                    @foreach($category as $value)
+                        <option value="{{$value->id}}">{{$value->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tag">标签(<span style="color: red"> *</span>)：</label>
+                <span class="tags">
+                    <input type="hidden" name="tags[]" value="PHP">
+                    PHP <a class="remove" style="text-decoration: none;">&times;</a>
+                </span>
+                <span class="tags" name="tags[]" value="NGINX">
+                    <input type="hidden" name="tags[]" value="NGINX">
+                    NGINX <a class="remove" style="text-decoration: none;">&times;</a>
+                </span>
+                <span class="tags" name="tags[]" value="LUA">
+                    <input type="hidden" name="tags[]" value="LUA">
+                    LUA
+                    <a class="remove" style="text-decoration: none;">&times;</a>
+                </span>
+                <select id="tag" class="form-control">
+                    <option selected>选择标签</option>
+                    <option>PHP</option>
+                    <option>LIFE</option>
+                    <option>MySQL</option>
+                    <option>NGINX</option>
+                </select>
             </div>
         </form>
         <hr>
@@ -35,7 +67,7 @@
         <div class="text-center" ng-node="operate">
             <button class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> 保存</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> 取消</button>
+            <a href="javascript:history.back();" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> 取消</a>
         </div>
     </div>
 @endsection

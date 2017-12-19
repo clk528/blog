@@ -22,11 +22,4 @@ class Categorie extends Model
     protected $fillable = [
         '*'
     ];
-
-    protected $hidden = [
-        'create_user',
-        'modify_user',
-        'created',
-        'modified'
-    ];
 }
