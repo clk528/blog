@@ -26,6 +26,7 @@ class Article extends Model
         'html',
         'tag',
         'status',
+        'category_id',
         'create_user',
         'modify_user'
     ];

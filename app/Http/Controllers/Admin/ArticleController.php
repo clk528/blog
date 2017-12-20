@@ -59,11 +59,13 @@ class ArticleController extends Controller
     public function editArticle($id)
     {
         $article = $this->articleService->getArticle($id,['id','title','subtitle','category_id','markdown']);
+        $category = \DB::table('categories')->get(['id','name']);
 
         $data = [
             'isEdit' => true,
             'title' =>  '-编辑文章',
             'page'  =>  'blog',
+            'category' => $category,
             'article'   => $article
         ];
 

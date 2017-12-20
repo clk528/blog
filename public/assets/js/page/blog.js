@@ -180,7 +180,8 @@
                     '<td>' + it.modified + '</td>' +
                     '<td>' + (function (s) {
                             if(s==0){
-                                return '<button class="btn btn-success btn-xs" style="margin-right: 5px;" ng-node="show-preview" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>' +
+                                return '<button class="btn btn-danger btn-xs" style="margin-right: 5px;" ng-node="delete" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>删除</button>' +
+                                    '<button class="btn btn-success btn-xs" style="margin-right: 5px;" ng-node="show-preview" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>' +
                                     '<button class="btn btn-info btn-xs" style="margin-right: 5px;" ng-node="edit" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>编辑</button>' +
                                     '<button class="btn btn-primary btn-xs" ng-node="up-shelf" ng-title="' + it.title +'" ng-id="' + it. id+ '"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>发表</button>';
                             }
@@ -220,7 +221,7 @@
                     });
                 }
 
-                if(node == 'show-preview'){
+                if(node == 'edit'){
                     return location.href = "/admin/editArticle/" + articleId;
                 }
 
