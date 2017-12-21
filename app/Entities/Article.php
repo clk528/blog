@@ -56,4 +56,8 @@ class Article extends Model
     {
         return $this->hasOne('App\Entities\Categorie','id','category_id');
     }
+    public function tags()
+    {
+        //return $this->hasOne('');
+    }
 }

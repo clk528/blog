@@ -49,6 +49,8 @@ class ArticleRepository
             $model = $model->Where($k,$v);
         });
 
+        $model->orderBy('id','desc');
+
 
         return $model->with(['category'=>function($query){
             return $query->select(['id','name']);
@@ -65,7 +67,9 @@ class ArticleRepository
     {
         $sb = empty($args) ? ['id','status','title','html','category_id','create_user as createUser','modify_user as modifyUser','created','modified'] : $args;
 
-        return $this->article->whereId($id)->first($sb);
+        return $this->article->with(['category'=>function($query){
+            return $query->select(['id','name']);
+        }])->whereId($id)->first($sb);
     }
 
     /**

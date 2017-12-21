@@ -78,9 +78,11 @@ class AdminController extends Controller
     public function addArticle()
     {
         $category = \DB::table('categories')->get(['id','name']);
+        $tag = \DB::table('tags')->get(['id','name']);
 
         $data = [
-            'category' => $category
+            'category' => $category,
+            'tags' => $tag
         ];
 
         return view('admin.addArticle',['page'=>'blog','title'=>'-添加文章'],$data);

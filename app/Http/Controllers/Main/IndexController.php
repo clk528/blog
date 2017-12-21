@@ -75,7 +75,7 @@ class IndexController extends Controller
      */
     function article($id)
     {
-        $article = $this->articleService->getArticle($id,['id','status','title','html','created']);
+        $article = $this->articleService->getArticle($id,['id','category_id','status','title','html','created']);
 
         $article->humanDate = Carbon::parse($article->created)->diffForHumans();
 

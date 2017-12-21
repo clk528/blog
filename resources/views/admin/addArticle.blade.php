@@ -34,25 +34,12 @@
             </div>
             <div class="form-group">
                 <label for="tag">标签(<span style="color: red"> *</span>)：</label>
-                <span class="tags">
-                    <input type="hidden" name="tags[]" value="PHP">
-                    PHP <a class="remove" style="text-decoration: none;">&times;</a>
-                </span>
-                <span class="tags" name="tags[]" value="NGINX">
-                    <input type="hidden" name="tags[]" value="NGINX">
-                    NGINX <a class="remove" style="text-decoration: none;">&times;</a>
-                </span>
-                <span class="tags" name="tags[]" value="LUA">
-                    <input type="hidden" name="tags[]" value="LUA">
-                    LUA
-                    <a class="remove" style="text-decoration: none;">&times;</a>
-                </span>
+                <span id="clk"></span>
                 <select id="tag" class="form-control">
-                    <option selected>选择标签</option>
-                    <option>PHP</option>
-                    <option>LIFE</option>
-                    <option>MySQL</option>
-                    <option>NGINX</option>
+                    <option selected value="">选择标签</option>
+                    @foreach($tags as $value)
+                        <option value="{{$value->id}}">{{$value->name}}</option>
+                    @endforeach
                 </select>
             </div>
         </form>
@@ -107,13 +94,32 @@
             document.getElementsByName('markdown')[0].value = '';
             document.getElementsByName('html')[0].value = '';
 
-            if($.trim(document.title)==''){
+            if($.trim(document.getElementById('title').value)==''){
                 return alert('不要忘记填写标题!');
+            }
+            if($.trim(document.getElementById('subtitle').value)==''){
+                return alert('不要忘记填写子标题!');
+            }
+            if($.trim(document.getElementById('category').value)==''){
+                return alert('请选择分类!');
+            }
+            if(document.getElementsByName('tags[]').length == 0){
+                return alert('请选择标签!');
             }
             document.getElementsByName('markdown')[0].value = testEditor.getMarkdown();
             document.getElementsByName('html')[0].value = testEditor.getPreviewedHTML();
             return addArticle.submit();
         });
+
+        $("#tag").on('change',function () {
+            if(this.value!="") {
+                $("#clk").append('<span class="tags">' + $(this).find('option:selected').text() + '<input type="hidden" name="tags[]" value="' + this.value + '"><a class="remove" style="text-decoration: none;">&times;</a></span>');
+            }
+        });
+
+        $(document).on('click','span .tags .remove',function () {
+            $(this).parent().remove();
+        })
     });
 </script>
 @endsection

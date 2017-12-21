@@ -8,7 +8,7 @@
     <main id="main">
         <article class="post">
             <header class="post-head"><h1 class="post-title">{{$title}}</h1>
-                <time datetime="{{$humanDate}}" class="post-time">{{$humanDate}}</time>
+                <time datetime="{{$humanDate}}" class="post-time">{{$humanDate}}  分类:{{$category['name']}}</time>
             </header>
             <div class="post-content">
             {!! $html !!}

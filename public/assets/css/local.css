@@ -268,3 +268,7 @@ table.tablesorter thead tr th:hover {
     font-size: 5px;
     cursor: pointer;
 }
+::selection {
+    color: #fff;
+    background: #02b875
+}

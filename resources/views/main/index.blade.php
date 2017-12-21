@@ -34,7 +34,7 @@
     });
     InstantClick.init();
 </script>--}}
-<script>
+{{--<script>
     layer.photos({
         photos: {
             "title": "扫码得红包",
@@ -51,5 +51,5 @@
         },
         anim: 5
     });
-</script>
+</script>--}}
 @endsection
