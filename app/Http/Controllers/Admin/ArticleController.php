@@ -61,12 +61,16 @@ class ArticleController extends Controller
         $article = $this->articleService->getArticle($id,['id','title','subtitle','category_id','markdown']);
         $category = \DB::table('categories')->get(['id','name']);
 
+        $tag = \DB::table('tags')->get(['id','name']);
+
+
         $data = [
             'isEdit' => true,
             'title' =>  '-编辑文章',
             'page'  =>  'blog',
             'category' => $category,
-            'article'   => $article
+            'article'   => $article,
+            'tags' => $tag
         ];
 
         return view('admin.addArticle',$data);
