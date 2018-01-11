@@ -115,6 +115,11 @@ class create_default_config_seeder extends Seeder
             'create_user' => $user->user,
             'modify_user' => $user->user
         ]);
+        $tag4 = \App\Entities\Tag::create([
+            'name' => 'linux',
+            'create_user' => $user->user,
+            'modify_user' => $user->user
+        ]);
         //标签印射
         \App\Entities\ArticleTagMapping::insert([
             [
@@ -144,6 +149,14 @@ class create_default_config_seeder extends Seeder
             [
                 'article_id' => $article2->id,
                 'tag_id' => $tag3->id,
+                'create_user' => $user->user,
+                'modify_user' => $user->user,
+                'created' => time(),
+                'modified' => time()
+            ],
+            [
+                'article_id' => $article3->id,
+                'tag_id' => $tag4->id,
                 'create_user' => $user->user,
                 'modify_user' => $user->user,
                 'created' => time(),
