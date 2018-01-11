@@ -61,22 +61,23 @@ class create_default_config_seeder extends Seeder
             'create_user' => $user->create_user,
             'modify_user' => $user->create_user,
         ]);
+
         $article2 = \App\Entities\Article::create([
-            'title' => 'CentOS之——CentOS7安装iptables防火墙',
-            'subtitle' => 'CentOS7安装iptables防火墙',
-            'markdown' => file_get_contents(base_path()."/tests/test2.md"),
-            'html' => file_get_contents(base_path()."/tests/test2.html"),
-            'category_id' => $category3->id,
-            'status' => 1,
-            'create_user' => $user->create_user,
-            'modify_user' => $user->create_user,
-        ]);
-        $article3 = \App\Entities\Article::create([
             'title' => 'PHP读取Excel的几种方式',
             'subtitle' => 'php读取Excel',
             'markdown' => file_get_contents(base_path()."/tests/test2.md"),
             'html' => file_get_contents(base_path()."/tests/test2.html"),
             'category_id' => $category2->id,
+            'status' => 1,
+            'create_user' => $user->create_user,
+            'modify_user' => $user->create_user,
+        ]);
+        $article3 = \App\Entities\Article::create([
+            'title' => 'CentOS之——CentOS7安装iptables防火墙',
+            'subtitle' => 'CentOS7安装iptables防火墙',
+            'markdown' => file_get_contents(base_path()."/tests/test3.md"),
+            'html' => file_get_contents(base_path()."/tests/test3.html"),
+            'category_id' => $category3->id,
             'status' => 1,
             'create_user' => $user->create_user,
             'modify_user' => $user->create_user,
