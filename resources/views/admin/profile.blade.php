@@ -26,7 +26,7 @@
 
                             <div class="row" style="margin-top: 1rem">
                                 <div class="col-lg-6 col-sm-6 col-xs-6">邮箱</div>
-                                <div class="col-lg-6 col-sm-6 col-xs-6"> 账号密码</div>
+                                <div class="col-lg-6 col-sm-6 col-xs-6"> 账号密码 <a href="javascript:void(0);" id="changePassword">修改密码</a></div>
                             </div>
                             <div class="row" style="margin-top: .5rem">
                                 <div class="col-lg-6 col-sm-6 col-xs-6"><input type="text" class="c-text" value="{{Auth::user()->email}}" disabled="true"></div>
@@ -56,10 +56,21 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        ;(function ($) {
+            $('#changePassword').click(function (e) {
+                layer.confirm('<p>输入密码：<input type="text" nam="password"></p><p>确认密码：<input type="text"></p>', {
+                    btn: ['重要','奇葩'] //按钮
+                }, function(){
+                    layer.msg('的确很重要', {icon: 1});
+                });
+            });
+        })(jQuery);
+    </script>
 @endsection
