@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
-        <meta name="author" content="clk528,clk528@clk528.com">
+        <meta name="author" content="clk528,clk@clk528.com">
         <meta name="renderer" content="webkit">
         <meta name="applicable-device" content="pc,mobile">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
