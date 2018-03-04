@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
-
+use App\Services\CategoriesService;
 class AdminController extends Controller
 {
     /**
@@ -31,7 +29,10 @@ class AdminController extends Controller
     {
         return view('admin.blog',['page'=>__FUNCTION__,'title'=>'-文章']);
     }
-
+    public function categoriesManger()
+    {
+        return view('admin.categoriesManger',['page'=>__FUNCTION__,'title'=>'-分类管理']);
+    }
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
