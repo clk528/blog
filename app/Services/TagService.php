@@ -34,4 +34,39 @@ class TagService
     {
         return $this->tagRepository->getTag();
     }
+
+    /**
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getTagList()
+    {
+        return $this->tagRepository->getTagList();
+    }
+    /**
+     * @return bool
+     */
+    public function addTag()
+    {
+        $name = request('name');
+        return $this->tagRepository->addTag($name);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function deleteTag()
+    {
+        $id = request('id');
+        return $this->tagRepository->deleteTag($id);
+    }
+
+    /**
+     * @return bool
+     */
+    public function updateTag()
+    {
+        $name = request('name');
+        $id = request('id');
+        return $this->tagRepository->updateTag($id,$name);
+    }
 }

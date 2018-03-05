@@ -23,6 +23,10 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin'],function(\Illuminate\Rou
      */
     $router->get('/categoriesManger','AdminController@categoriesManger')->name('categoriesManger');
     /**
+     * 分类管理
+     */
+    $router->get('/tagsManger','AdminController@tagsManger')->name('tagsManger');
+    /**
      * 个人信息
      */
     $router->get('/profile', 'AdminController@profile')->name('profile');

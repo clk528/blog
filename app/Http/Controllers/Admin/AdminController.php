@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\CategoriesService;
+
 class AdminController extends Controller
 {
     /**
@@ -29,9 +29,17 @@ class AdminController extends Controller
     {
         return view('admin.blog',['page'=>__FUNCTION__,'title'=>'-文章']);
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function categoriesManger()
     {
         return view('admin.categoriesManger',['page'=>__FUNCTION__,'title'=>'-分类管理']);
+    }
+    public function tagsManger()
+    {
+        return view('admin.tagsManger',['page'=>__FUNCTION__,'title'=>'-标签管理']);
     }
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

@@ -42,6 +42,14 @@ class CategoriesRepository
 
         return $model->paginate($perPage);
     }
+    /**
+     * 获取分类
+     * @return array
+     */
+    function getCategories()
+    {
+        return $this->categories->all(['id','name'])->toArray();
+    }
 
     public function addCategories($name)
     {

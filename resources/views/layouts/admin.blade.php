@@ -68,6 +68,7 @@
                 <li {{ $page =='profile' ? 'class=active' : ''}}><a href="{{route('profile')}}"><i class="fa fa-tasks"></i> 个人信息</a></li>
                 <li {{ $page =='blog' ? 'class=active' : ''}}><a href="{{route('blog')}}"><i class="fa fa-book"></i> 文章</a></li>
                 <li {{ $page =='categoriesManger' ? 'class=active' : ''}}><a href="{{route('categoriesManger')}}"><i class="fa fa-book"></i> 分类管理</a></li>
+                <li {{ $page =='tagsManger' ? 'class=active' : ''}}><a href="{{route('tagsManger')}}"><i class="fa fa-book"></i> 标签管理</a></li>
                 <li {{ $page =='forms' ? 'class=active' : ''}}><a href="{{route('forms')}}"><i class="fa fa-list-ol"></i> 表单</a></li>
                 <li {{ $page =='typography' ? 'class=active' : ''}}><a href="{{route('typography')}}"><i class="fa fa-font"></i> 字体展示</a></li>
                 <li {{ $page =='bootstrapElements' ? 'class=active' : ''}}><a href="{{route('bootstrapElements')}}"><i class="fa fa-list-ul"></i> Bootstrap 的样式</a></li>
@@ -101,6 +102,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;"><i class="fa fa-user"></i> {{ Auth::user()->user }}<b
                                 class="caret"></b></a>
                     <ul class="dropdown-menu">
+                        <li><a href="{{route('index')}}"><i class="fa fa-tree"></i> 浏览主站</a></li>
                         <li><a href="{{route('profile')}}"><i class="fa fa-user"></i> 个人信息</a></li>
                         <li><a href="#"><i class="fa fa-gear"></i> 设置</a></li>
                         <li class="divider"></li>

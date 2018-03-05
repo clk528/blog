@@ -24,6 +24,16 @@ class CategoriesService
     }
 
     /**
+     * 获取标签
+     * @return array
+     */
+    public function getCategories()
+    {
+        return $this->categoriesRepository->getCategories();
+    }
+
+
+    /**
      * @return bool
      */
     public function addCategories()

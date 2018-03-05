@@ -2,46 +2,57 @@
 /**
  * Created by PhpStorm.
  * User: clk
- * Date: 2018/3/4 0004
- * Time: 17:20
+ * Date: 05/03/2018
+ * Time: 10:44 AM
  */
 
-namespace App\Http\Controllers\Categories;
+namespace App\Http\Controllers\Tags;
 
 use App\Http\Controllers\Controller;
-use App\Services\CategoriesService;
+use App\Services\TagService;
 use Illuminate\Http\Request;
 use Validator;
 
-class CategoriesController extends Controller
+class TagController extends Controller
 {
-    protected $categoriesService;
+    /**
+     * @var TagService
+     */
+    protected $tagService;
 
-    public function __construct(CategoriesService $categoriesService)
+    /**
+     * TagController constructor.
+     * @param TagService $tagService
+     */
+    public function __construct(TagService $tagService)
     {
-        $this->categoriesService = $categoriesService;
+        $this->tagService = $tagService;
     }
 
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getCategoriesList()
+    public function getTagList()
     {
-        $data = $this->categoriesService->getCategoriesList();
+        $data = $this->tagService->getTagList();
         return \Response::json($data);
     }
 
-    public function addCategories(Request $request)
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addTag(Request $request)
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required'
         ]);
 
         if($validator->fails()){
-            return \Response::json(['code'=>0,'message'=>'分类名称不能为空']);
+            return \Response::json(['code'=>0,'message'=>'标签名称不能为空']);
         }
 
-        $result = $this->categoriesService->addCategories();
+        $result = $this->tagService->addTag();
 
         if($result){
             $result = $result->toArray();
@@ -51,17 +62,21 @@ class CategoriesController extends Controller
         return \Response::json(['code'=>0,'message'=>'添加失败']);
     }
 
-    public function deleteCategories(Request $request)
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteTag(Request $request)
     {
         $validator = Validator::make($request->all(),[
             'id' => 'required'
         ]);
 
         if($validator->fails()){
-            return \Response::json(['code'=>0,'message'=>'分类名称不能为空']);
+            return \Response::json(['code'=>0,'message'=>'标签名称不能为空']);
         }
 
-        $result = $this->categoriesService->deleteCategories();
+        $result = $this->tagService->deleteTag();
 
         if($result){
             return \Response::json(['code'=>1,'message'=>'删除成功']);
@@ -70,7 +85,11 @@ class CategoriesController extends Controller
         return \Response::json(['code'=>0,'message'=>'删除失败']);
     }
 
-    public function updateCategories(Request $request)
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateTag(Request $request)
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required',
@@ -78,10 +97,10 @@ class CategoriesController extends Controller
         ]);
 
         if($validator->fails()){
-            return \Response::json(['code'=>0,'message'=>'分类名称不能为空']);
+            return \Response::json(['code'=>0,'message'=>'标签名称不能为空']);
         }
 
-        $result = $this->categoriesService->updateCategories();
+        $result = $this->tagService->updateTag();
 
         if($result){
             return \Response::json(['code'=>1,'message'=>'更新成功']);

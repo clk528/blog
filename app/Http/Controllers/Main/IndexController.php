@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 
 use App\Services\ArticleService;
-use App\Services\CategoryService;
+use App\Services\CategoriesService;
 use App\Services\TagService;
 use Carbon\Carbon;
 
@@ -21,9 +21,9 @@ class IndexController extends Controller
      */
     protected $articleService;
     /**
-     * @var CategoryService
+     * @var CategoriesService
      */
-    protected $categoryService;
+    protected $categoriesService;
     /**
      * @var TagService
      */
@@ -31,13 +31,13 @@ class IndexController extends Controller
     /**
      * IndexController constructor.
      * @param ArticleService $articleService
-     * @param CategoryService $categoryService
+     * @param CategoriesService $categoriesService
      * @param TagService $tagService
      */
-    public function __construct(ArticleService $articleService ,CategoryService $categoryService ,TagService $tagService)
+    public function __construct(ArticleService $articleService ,CategoriesService $categoriesService ,TagService $tagService)
     {
         $this->articleService = $articleService;
-        $this->categoryService = $categoryService;
+        $this->categoriesService = $categoriesService;
         $this->tagService = $tagService;
     }
 
@@ -51,7 +51,7 @@ class IndexController extends Controller
 
         $articleList = $this->articleService->getArticleList(); //获取文章
 
-        $Categories = $this->categoryService->getCategories();//获取类别
+        $Categories = $this->categoriesService->getCategories();//获取类别
 
         $tag = $this->tagService->getTag();//获取标签
 

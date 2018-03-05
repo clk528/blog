@@ -1,15 +1,15 @@
 !(function ($) {
-    function categories()
+    function tags()
     {
         this._token = token.value;
         this._event();
         return this._init();
     }
-    categories.prototype = {
+    tags.prototype = {
         _token:null,
         _init:function () {
             $.ajax({
-                url:'/cate/getCategoriesList',
+                url:'/tag/getTagList',
                 type:'post',
                 data:{
                     _token:this._token
@@ -20,7 +20,7 @@
 
                     for(var i in data){
                         tpl += '' +
-                        '<tr>' +
+                            '<tr>' +
                             '<td>' + data[i].id + '</td>' +
                             '<td>' + data[i].name + '</td>' +
                             '<td>' + data[i].create_user + '</td>' +
@@ -28,9 +28,9 @@
                             '<td>' + data[i].created + '</td>' +
                             '<td>' + data[i].modified + '</td>' +
                             '<td>' +
-                                '<button type="button" data-id="' +data[i].id + '" name="delete" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>删除</button>　' +
-                                '<button type="button" data-id="' +data[i].id + '" name="edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>编辑</button></td>' +
-                        '</tr>';
+                            '<button type="button" data-id="' +data[i].id + '" name="delete" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>删除</button>　' +
+                            '<button type="button" data-id="' +data[i].id + '" name="edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>编辑</button></td>' +
+                            '</tr>';
                     }
                     $("#tbody").html(tpl);
                 },
@@ -40,10 +40,10 @@
             });
         },
         _addCategories:function () {
-            layer.prompt({title: '输入分类名称',move:false },function(val, index){
+            layer.prompt({title: '输入标签名称',move:false },function(val, index){
                 layer.close(index);
                 $.ajax({
-                    url:'/cate/addCategories',
+                    url:'/tag/addTag',
                     type:'post',
                     data:{
                         _token:token.value,
@@ -89,11 +89,11 @@
                 text = $(this).parent().siblings(':eq(1)').text(),
                 that = this;
 
-            layer.prompt({title: '编辑分类名称',move:false,value:text },function(val, index){
+            layer.prompt({title: '编辑标签名称',move:false,value:text },function(val, index){
                 layer.close(index);
 
                 $.ajax({
-                    url:'/cate/updateCategories',
+                    url:'/tag/updateTag',
                     type:'post',
                     data:{
                         _token:token.value,
@@ -124,10 +124,10 @@
             var id = $(this).data('id'),
                 that = this;
 
-            layer.confirm('确定删除这个分类吗？',  function(){
+            layer.confirm('确定删除这个标签吗？',  function(){
 
                 $.ajax({
-                    url:'/cate/deleteCategories',
+                    url:'/tag/deleteTag',
                     type:'post',
                     data:{
                         _token:token.value,
@@ -164,5 +164,5 @@
 
         }
     };
-    new categories();
+    new tags();
 })(jQuery);

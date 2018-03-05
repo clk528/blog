@@ -36,6 +36,11 @@ require_once __DIR__."/routes/admin.php";
 require_once __DIR__."/routes/categories.php";
 
 /**
+ * 标签模块
+ */
+require_once __DIR__."/routes/tag.php";
+
+/**
  * 上传模块
  */
 require_once __DIR__."/routes/upload.php";
