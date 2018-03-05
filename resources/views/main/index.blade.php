@@ -5,7 +5,7 @@
             @foreach($data as $value)
             <article class="post">
                 <header class="post-head"><h2 class="post-title">
-                        <a href="{{route('article.detail',['id'=>$value['id']])}}">{{$value['title']}}</a>
+                        <a href="{{route('main.detail',['id'=>$value['id']])}}">{{$value['title']}}</a>
                     </h2>
                     <time datetime="{{$value['humanDate']}}" class="post-time">{{$value['humanDate']}}</time>
                 </header>

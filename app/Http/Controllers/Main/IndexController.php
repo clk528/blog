@@ -68,6 +68,64 @@ class IndexController extends Controller
 
         return view('main.index',array_merge($data,$articleList->toArray()));
     }
+
+    /**
+     * 文章分类列表
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    function category($id)
+    {
+        request()->replace(['where' => ['status'=>1,'category_id' => $id]]);
+
+        $articleList = $this->articleService->getArticleList(); //获取文章
+
+        $Categories = $this->categoriesService->getCategories();//获取类别
+
+        $tag = $this->tagService->getTag();//获取标签
+
+        if(!$articleList->isEmpty()){
+            $articleList->map(function($item){
+                $item->humanDate = Carbon::parse($item->created)->diffForHumans();
+            });
+        }
+
+        $data = [
+            'categories' => $Categories,
+            'tags' => $tag,
+        ];
+
+        return view('main.index',array_merge($data,$articleList->toArray()));
+    }
+
+    /**
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    function tags($id)
+    {
+        request()->replace(['where' => ['status'=>1,'category_id' => $id]]);
+
+        $articleList = $this->articleService->getArticleList(); //获取文章
+
+        $Categories = $this->categoriesService->getCategories();//获取类别
+
+        $tag = $this->tagService->getTag();//获取标签
+
+        if(!$articleList->isEmpty()){
+            $articleList->map(function($item){
+                $item->humanDate = Carbon::parse($item->created)->diffForHumans();
+            });
+        }
+
+        $data = [
+            'categories' => $Categories,
+            'tags' => $tag,
+        ];
+
+        return view('main.index',array_merge($data,$articleList->toArray()));
+    }
     /**
      * 文章详情页
      * @param $id

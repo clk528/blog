@@ -56,8 +56,25 @@ class Article extends Model
     {
         return $this->hasOne('App\Entities\Categorie','id','category_id');
     }
-    public function tags()
+
+    /**
+     * 将文章ID和tagsID关联
+     * @param $articleId
+     * @param $tagsArray
+     */
+    function mapping_tag_id($result,$tagsArray)
     {
-        //return $this->hasOne('');
+        $data = collect($tagsArray)->map(function($tagId)use($result){
+            return [
+                'article_id' => $result->id,
+                'create_user' => $result->create_user,
+                'modify_user' => $result->create_user,
+                'tag_id' => $tagId,
+                'created' => time(),
+                'modified' => time(),
+            ];
+        })->toArray();
+
+        \App\Entities\ArticleTagMapping::insert($data);
     }
 }

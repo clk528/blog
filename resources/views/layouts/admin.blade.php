@@ -102,7 +102,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white;"><i class="fa fa-user"></i> {{ Auth::user()->user }}<b
                                 class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{route('index')}}"><i class="fa fa-tree"></i> 浏览主站</a></li>
+                        <li><a href="{{route('main.index')}}"><i class="fa fa-tree"></i> 浏览主站</a></li>
                         <li><a href="{{route('profile')}}"><i class="fa fa-user"></i> 个人信息</a></li>
                         <li><a href="#"><i class="fa fa-gear"></i> 设置</a></li>
                         <li class="divider"></li>

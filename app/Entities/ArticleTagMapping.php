@@ -19,6 +19,10 @@ class ArticleTagMapping extends Model
     protected $dateFormat = "U";
 
     protected $fillable = [
-        '*'
+        'id',
+        'article_id',
+        'tag_id',
+        'create_user',
+        'modify_user'
     ];
 }

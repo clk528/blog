@@ -79,6 +79,11 @@ class ArticleRepository
     public function addArticle()
     {
         $title = request('title');
+
+        $tags = request('tags');
+
+        $user = \Auth::user()->user;
+
         $article = [
             'title' => request('title'),
             'subtitle' =>  request('subtitle',$title),
@@ -86,13 +91,15 @@ class ArticleRepository
             'html' => request('html'),
             'category_id' => request('category',1),
             'status' => 0,
-            'create_user' => \Auth::user()->user,
-            'modify_user' => \Auth::user()->user
+            'create_user' => $user,
+            'modify_user' => $user
         ];
 
-        //dd($article);
+        $result = $this->article->create($article);
 
-        return $this->article->create($article);
+        $this->article->mapping_tag_id($result,$tags);
+
+        return $result;
     }
 
     /**

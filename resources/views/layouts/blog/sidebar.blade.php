@@ -2,13 +2,13 @@
     <section class="categories">
         <h3 class="aside-title"><i class="iconfont icon-folder-open-o"></i> Categories</h3>
         @foreach($categories as $id=>$value)
-            <a class="tag" href="/cate/{{$id}}" title="{{$value['name']}}">{{$value['name']}}</a>
+            <a class="tag" href="{{route('main.category',['id'=>$value['id']])}}" title="{{$value['name']}}">{{$value['name']}}</a>
         @endforeach
     </section>
     <section class="tags">
         <h3 class="aside-title"><i class="iconfont icon-tags"></i>Tags</h3>
         @foreach($tags as $id=>$value)
-            <a class="tag" href="/tag/{{$id}}" title="{{$value['name']}}">{{$value['name']}}</a>
+            <a class="tag" href="javascript:void(0)" title="{{$value['name']}}">{{$value['name']}}</a>
         @endforeach
     </section>
     <section class="friends">
