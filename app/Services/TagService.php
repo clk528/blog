@@ -28,11 +28,12 @@ class TagService
 
     /**
      * 获取标签
+     * @param $where
      * @return array
      */
-    function getTag()
+    function getTag($where=[])
     {
-        return $this->tagRepository->getTag();
+        return $this->tagRepository->getTag($where);
     }
 
     /**

@@ -8,7 +8,7 @@
     <section class="tags">
         <h3 class="aside-title"><i class="iconfont icon-tags"></i>Tags</h3>
         @foreach($tags as $id=>$value)
-            <a class="tag" href="javascript:void(0)" title="{{$value['name']}}">{{$value['name']}}</a>
+            <a class="tag" href="{{route('main.tags',['id'=>$value['id']])}}" title="{{$value['name']}}">{{$value['name']}}</a>
         @endforeach
     </section>
     <section class="friends">

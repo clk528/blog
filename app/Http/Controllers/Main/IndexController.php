@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Services\ArticleService;
 use App\Services\CategoriesService;
 use App\Services\TagService;
+use App\Services\ArticleTagMappingService;
 use Carbon\Carbon;
 
 class IndexController extends Controller
@@ -29,16 +30,22 @@ class IndexController extends Controller
      */
     protected $tagService;
     /**
+     * @var ArticleTagMappingService
+     */
+    protected $articleTagMappingService;
+    /**
      * IndexController constructor.
      * @param ArticleService $articleService
      * @param CategoriesService $categoriesService
      * @param TagService $tagService
+     * @param ArticleTagMappingService $articleTagMappingService
      */
-    public function __construct(ArticleService $articleService ,CategoriesService $categoriesService ,TagService $tagService)
+    public function __construct(ArticleService $articleService ,CategoriesService $categoriesService ,TagService $tagService,ArticleTagMappingService $articleTagMappingService)
     {
         $this->articleService = $articleService;
         $this->categoriesService = $categoriesService;
         $this->tagService = $tagService;
+        $this->articleTagMappingService = $articleTagMappingService;
     }
 
     /**
@@ -105,18 +112,33 @@ class IndexController extends Controller
      */
     function tags($id)
     {
-        request()->replace(['where' => ['status'=>1,'category_id' => $id]]);
-
-        $articleList = $this->articleService->getArticleList(); //获取文章
+        $articleIdList = $this->articleTagMappingService->getArticleIdList($id);
 
         $Categories = $this->categoriesService->getCategories();//获取类别
 
         $tag = $this->tagService->getTag();//获取标签
 
-        if(!$articleList->isEmpty()){
-            $articleList->map(function($item){
-                $item->humanDate = Carbon::parse($item->created)->diffForHumans();
-            });
+        if(empty($articleIdList)){
+            $articleList = collect([]);
+        } else {
+            request()->replace(['where' => [
+                'status'=>1,
+                'with' => [
+                    'case' => 'in',
+                    'key' => 'id',
+                    'value' => $articleIdList
+                ]
+            ]]);
+
+            //dd(request()->all());
+
+            $articleList = $this->articleService->getArticleList(); //获取文章
+
+            if(!$articleList->isEmpty()){
+                $articleList->map(function($item){
+                    $item->humanDate = Carbon::parse($item->created)->diffForHumans();
+                });
+            }
         }
 
         $data = [
@@ -136,6 +158,16 @@ class IndexController extends Controller
         $article = $this->articleService->getArticle($id,['id','category_id','status','title','html','created']);
 
         $article->humanDate = Carbon::parse($article->created)->diffForHumans();
+
+        $tagIdList = $this->articleTagMappingService->getTagIdList($id);
+
+        $tags = $this->tagService->getTag(['with' => [
+            'case' => 'in',
+            'key' => 'id',
+            'value' => $tagIdList
+        ]]);
+
+        $article->tags = $tags;
 
         return view('main.article',$article);
     }

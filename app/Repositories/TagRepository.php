@@ -27,11 +27,27 @@ class TagRepository
     }
 
     /**
-     * 获取分类
+     * 获取标签
+     * @param $where
      * @return array
      */
-    function getTag()
+    function getTag($where)
     {
+        if($where){
+            $model = $this->tag;
+
+            collect($where)->map(function($v,$k)use(&$model){
+                if($k =='with' && is_array($v)){
+                    if($v['case'] == 'in'){
+                        $model = $model->WhereIn($v['key'],$v['value']);
+                    }
+                }else{
+                    $model = $model->Where($k,$v);
+                }
+            });
+
+            return $model->get(['id','name'])->toArray();
+        }
         return $this->tag->all(['id','name'])->toArray();
     }
 

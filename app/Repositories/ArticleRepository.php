@@ -46,7 +46,13 @@ class ArticleRepository
         });
 
         collect($where)->each(function($v,$k) use(&$model){
-            $model = $model->Where($k,$v);
+            if($k =='with' && is_array($v)){
+                if($v['case'] == 'in'){
+                    $model = $model->WhereIn($v['key'],$v['value']);
+                }
+            }else{
+                $model = $model->Where($k,$v);
+            }
         });
 
         $model->orderBy('id','desc');

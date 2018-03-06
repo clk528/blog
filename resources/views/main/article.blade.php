@@ -15,7 +15,9 @@
             </div>
             <footer class="post-foot">
                 <section class="tags">
-                    <a class="tag" href="/tag/8">杂谈</a>
+                    @foreach($tags as $item)
+                        <a class="tag" href="{{route('main.tags',['id' => $item['id']])}}">{{$item['name']}}</a>
+                    @endforeach
                 </section>
             </footer>
         </article>
