@@ -33,10 +33,12 @@ class UploadController extends Controller
         $this->uploadService = $uploadService;
         $this->apiResponse = $apiResponse;
     }
+
     /**
      * 上传一张图片
      * @param Request $request
      * @return mixed
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function upload(Request $request)
     {
