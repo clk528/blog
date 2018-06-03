@@ -25,7 +25,7 @@ class ArticleService
 
     /**
      * 获取文章列表
-     * @return mixed
+     * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function getArticleList()
     {

@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => env('TIME_ZONE','Asia/Shanghai'),
+    'timezone' => env('TIME_ZONE', 'Asia/Shanghai'),
 
     /*
     |--------------------------------------------------------------------------
@@ -176,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
 
 
         EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider::class,

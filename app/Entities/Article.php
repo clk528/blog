@@ -9,7 +9,6 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-//use Carbon\Carbon;
 
 class Article extends Model
 {
@@ -35,19 +34,19 @@ class Article extends Model
      * @param $date
      * @return false|string
      */
-    public function getCreatedAttribute($date)
-    {
-        return date('Y-m-d H:i:s',$date);
-    }
-
-    /**
-     * @param $date
-     * @return false|string
-     */
-    public function getModifiedAttribute($date)
-    {
-        return date('Y-m-d H:i:s',$date);
-    }
+//    public function getCreatedAttribute($date)
+//    {
+//        return date('Y-m-d H:i:s',$date);
+//    }
+//
+//    /**
+//     * @param $date
+//     * @return false|string
+//     */
+//    public function getModifiedAttribute($date)
+//    {
+//        return date('Y-m-d H:i:s',$date);
+//    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

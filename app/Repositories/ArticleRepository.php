@@ -28,39 +28,40 @@ class ArticleRepository
 
     /**
      * 获取文章翻页
-     * @return mixed
+     * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function getArticleList()
     {
-        $search = request('search',[]);
-        $where = request('where',[]);
+        $search = request('search', []);
+        $where = request('where', []);
 
-        $perPage = request('per_page',20);
+        $perPage = request('per_page', 20);
 
         //dd($this->article->with('category')->first(['title','id','category_id'])->toArray());
 
-        $model = $this->article;
+        $model = $this->article->Where('status', 1);
 
-        collect($search)->each(function($v,$k) use(&$model){
-            $model = $model->Where($k,'like',"%{$v}%");
+
+        collect($search)->each(function ($v, $k) use (&$model) {
+            $model = $model->Where($k, 'like', "%{$v}%");
         });
 
-        collect($where)->each(function($v,$k) use(&$model){
-            if($k =='with' && is_array($v)){
-                if($v['case'] == 'in'){
-                    $model = $model->WhereIn($v['key'],$v['value']);
+        collect($where)->each(function ($v, $k) use (&$model) {
+            if ($k == 'with' && is_array($v)) {
+                if ($v['case'] == 'in') {
+                    $model = $model->WhereIn($v['key'], $v['value']);
                 }
-            }else{
-                $model = $model->Where($k,$v);
+            } else {
+                $model = $model->Where($k, $v);
             }
         });
 
-        $model->orderBy('id','desc');
+        $model->orderBy('id', 'desc');
 
 
-        return $model->with(['category'=>function($query){
-            return $query->select(['id','name']);
-        }])->paginate($perPage,['id','title','category_id','subtitle','status','create_user as createUser','modify_user as modifyUser','created','modified']);
+        return $model->with(['category' => function ($query) {
+            return $query->select(['id', 'name']);
+        }])->paginate($perPage, ['id', 'title', 'category_id', 'subtitle', 'status', 'create_user as createUser', 'modify_user as modifyUser', 'created', 'modified']);
     }
 
     /**
@@ -69,13 +70,13 @@ class ArticleRepository
      * @param array $args
      * @return mixed
      */
-    public function getArticle($id,array $args = [])
+    public function getArticle($id, array $args = [])
     {
-        $sb = empty($args) ? ['id','status','title','html','category_id','create_user as createUser','modify_user as modifyUser','created','modified'] : $args;
+        $sb = empty($args) ? ['id', 'status', 'title', 'html', 'category_id', 'create_user as createUser', 'modify_user as modifyUser', 'created', 'modified'] : $args;
 
-        return $this->article->with(['category'=>function($query){
-            return $query->select(['id','name']);
-        }])->whereId($id)->first($sb);
+        return $this->article->with(['category' => function ($query) {
+            return $query->select(['id', 'name']);
+        }])->whereId($id)->whereStatus(1)->first($sb);
     }
 
     /**
@@ -92,10 +93,10 @@ class ArticleRepository
 
         $article = [
             'title' => request('title'),
-            'subtitle' =>  request('subtitle',$title),
-            'markdown' =>  request('markdown'),
+            'subtitle' => request('subtitle', $title),
+            'markdown' => request('markdown'),
             'html' => request('html'),
-            'category_id' => request('category',1),
+            'category_id' => request('category', 1),
             'status' => 0,
             'create_user' => $user,
             'modify_user' => $user
@@ -103,7 +104,7 @@ class ArticleRepository
 
         $result = $this->article->create($article);
 
-        $this->article->mapping_tag_id($result,$tags);
+        $this->article->mapping_tag_id($result, $tags);
 
         return $result;
     }
@@ -115,10 +116,10 @@ class ArticleRepository
     public function modifyArticle()
     {
         $article = $this->article->whereId(1)->first(['*']);
-        if(!is_null($article)){
+        if (!is_null($article)) {
             return $article->update([
                 'title' => '我是标题',
-                'content' => '我是文章-----'.date('Y-m-d H:i:s'),
+                'content' => '我是文章-----' . date('Y-m-d H:i:s'),
                 'tag' => 'zihuan',
                 'create_user' => 'admin',
                 'modify_user' => 'admin'
@@ -126,6 +127,7 @@ class ArticleRepository
         }
         return false;
     }
+
     /**
      * 上线一篇文章
      * @param $id
@@ -137,6 +139,7 @@ class ArticleRepository
             'status' => 1
         ]);
     }
+
     /**
      * 下线一篇文章
      * @param integer $id
@@ -148,6 +151,7 @@ class ArticleRepository
             'status' => 2
         ]);
     }
+
     /**
      * 删除文章
      * @param $id
@@ -164,14 +168,14 @@ class ArticleRepository
      */
     public function saveEditArticle()
     {
-        $id = request('id','');
-        if(empty($id)){
+        $id = request('id', '');
+        if (empty($id)) {
             return false;
         }
-        $title = request('title','');
-        $markdown = request('markdown','');
-        $html = request('html','');
-        $subtitle = request('subtitle','');
+        $title = request('title', '');
+        $markdown = request('markdown', '');
+        $html = request('html', '');
+        $subtitle = request('subtitle', '');
 
         return $this->article->whereId($id)->update([
             'status' => 0,
