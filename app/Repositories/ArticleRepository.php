@@ -35,7 +35,7 @@ class ArticleRepository
         $search = request('search', []);
         $where = request('where', []);
 
-        $perPage = request('per_page', 20);
+        $perPage = request('per_page', 10);
 
         //dd($this->article->with('category')->first(['title','id','category_id'])->toArray());
 
