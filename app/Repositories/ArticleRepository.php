@@ -28,7 +28,7 @@ class ArticleRepository
 
     /**
      * 获取文章翻页
-     * @return \Illuminate\Pagination\LengthAwarePaginator
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getArticleList()
     {
@@ -72,7 +72,7 @@ class ArticleRepository
      */
     public function getArticle($id, array $args = [])
     {
-        $sb = empty($args) ? ['id', 'status', 'title', 'html', 'category_id', 'create_user as createUser', 'modify_user as modifyUser', 'created', 'modified'] : $args;
+        $sb = empty($args) ? ['id', 'title', 'status', 'category_id', 'html', 'create_user as createUser', 'modify_user as modifyUser', 'created', 'modified'] : $args;
 
         return $this->article->with(['category' => function ($query) {
             return $query->select(['id', 'name']);

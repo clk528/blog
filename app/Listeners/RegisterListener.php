@@ -10,9 +10,11 @@ namespace App\Listeners;
 
 use App\Events\RegisterEvent;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Mail\Message;
 
 class RegisterListener
-{    /**
+{
+    /**
      * RegisterListener constructor.
      */
     public function __construct()
@@ -25,13 +27,10 @@ class RegisterListener
      */
     public function handle(RegisterEvent $event)
     {
-        $d = $event->user->toArray();
-        \Log::info(json_encode($d));
-
-        $name = '学院君';
-        $flag = Mail::send('welcome',['name'=>$name],function($message){
+        $user = $event->user;
+        Mail::send('welcome', ['name' => config('app.name')], function (Message $message) use ($user) {
             $to = 'clk528@qq.com';
-            $message ->to($to)->subject('测试邮件');
+            $message->to($user['email'])->subject('恭喜你注册成功');
         });
     }
 }

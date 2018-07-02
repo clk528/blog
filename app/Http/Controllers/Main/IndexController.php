@@ -66,7 +66,7 @@ class IndexController extends Controller
     }
 
     /**
-     *
+     * 根据标签获取文章
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
