@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use \Illuminate\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::group(['prefix' => 'article', 'namespace' => 'Article'], function (Router $router) {
+    $router->post('/', 'ArticleController@getArticleList')->name('api.article.getArticleList');
+    $router->post('/getArticle','ArticleController@getArticle')->name('api.article.getArticle');
 });
