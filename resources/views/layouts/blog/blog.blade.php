@@ -16,7 +16,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="{{asset('css/style.css')}}?v={{config('custom.static_version','1')}}" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+        <script src="//lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
         <script src="{{asset('assets/components/layer/layer.js')}}"></script>
         @yield('head')
     </head>
