@@ -15,7 +15,7 @@
                 },
                 page:1
             }).then(function (data) {
-                var list = data.data.data;
+                var list = data.data;
                 if(list.length ==0 ){
                     return $("#onsale table tbody").html('<tr><td colspan="7"><div class="alert alert-success" role="alert"><a href="#" class="alert-link">暂无已发表的文章！去添加文章把。</a></div></td></tr>');
                 }
@@ -52,7 +52,7 @@
                 },
                 page:page
             }).then(function (data) {
-                var list = data.data.data;
+                var list = data.data;
 
                 if(list.length ==0 ){
                     return $("#onsale table tbody").html('<tr><td  colspan="7"><div class="alert alert-success" role="alert"><a href="#" class="alert-link">暂无已发表的文章！去添加文章把。</a></div></td></tr>');
@@ -89,7 +89,7 @@
                 },
                 page:page
             }).then(function (data) {
-                var list = data.data.data;
+                var list = data.data;
 
                 if(list.length ==0 ){
                     return $("#unshelf table tbody").html('<tr><td  colspan="7"><div class="alert alert-success" role="alert"><a href="#" class="alert-link">暂无已下架的文章！</a></div></td></tr>');
@@ -126,7 +126,7 @@
                 },
                 page:page
             }).then(function (data) {
-                var list = data.data.data;
+                var list = data.data;
 
                 if(list.length ==0 ){
                     return $("#unpublish table tbody").html('<tr><td  colspan="7"><div class="alert alert-success" role="alert"><a href="#" class="alert-link">暂无已发表的文章！</a></div></td></tr>');

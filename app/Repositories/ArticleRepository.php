@@ -32,19 +32,27 @@ class ArticleRepository
      */
     public function getArticleList()
     {
-        $search = request('search', []);
+//        $search = request('search', []);
         $where = request('where', []);
 
         $perPage = request('per_page', 10);
 
         //dd($this->article->with('category')->first(['title','id','category_id'])->toArray());
 
-        $model = $this->article->Where('status', 1);
+//        $model = $this->article->Where('status', 1);
 
+        $model = $this->article;
 
-        collect($search)->each(function ($v, $k) use (&$model) {
-            $model = $model->Where($k, 'like', "%{$v}%");
-        });
+//        collect($search)->each(function ($v, $k) use (&$model) {
+//
+//            if($k=='status'){
+//                $model = $model->Where($k,  $v);
+//            } else {
+//                $model = $model->Where($k, 'like', "%{$v}%");
+//            }
+//
+//
+//        });
 
         collect($where)->each(function ($v, $k) use (&$model) {
             if ($k == 'with' && is_array($v)) {
