@@ -64,7 +64,7 @@ class ArticleRepository
             }
         });
 
-        $model->orderBy('id', 'desc');
+        $model = $model->orderBy('id', 'desc');
 
 
         return $model->with(['category' => function ($query) {
